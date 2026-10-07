@@ -26,16 +26,16 @@
   --warn:#FFD43B; --on-warn:#0B1220;
   --display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
-  --b:2px solid var(--ink); --r:8px;
+  --line:#0B1220; --sel:#0B1220; --on-sel:#EDF0F4; --link:#2541E8;
+  --b:2px solid var(--line); --r:8px;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0B1220; --surface:#151D30; --ink:#EEF1F7; --muted:#A3ADC2;
-  --accent:#7D93FF; --on-accent:#0B1220; --done:#3DDC84; --on-done:#0B1220;
-  --warn:#FFD43B; --on-warn:#0B1220; color-scheme:dark}}
+/* Light is the default for everyone. Dark only applies when the visitor picks it. */
 :root[data-theme="dark"]{
-  --bg:#0B1220; --surface:#151D30; --ink:#EEF1F7; --muted:#A3ADC2;
-  --accent:#7D93FF; --on-accent:#0B1220; --done:#3DDC84; --on-done:#0B1220;
-  --warn:#FFD43B; --on-warn:#0B1220; color-scheme:dark}
+  --bg:#12161F; --surface:#1B212D; --ink:#E8EBF1; --muted:#B3BBC9;
+  --accent:#8EA2FF; --on-accent:#0B1220; --done:#4CD787; --on-done:#0B1220;
+  --warn:#F2CD52; --on-warn:#14110A;
+  --line:#4A5470; --sel:#8EA2FF; --on-sel:#0B1220; --link:#A9B8FF;
+  color-scheme:dark}
 
 *{box-sizing:border-box}
 html{color-scheme:light;-webkit-text-size-adjust:100%}
@@ -43,7 +43,7 @@ html{color-scheme:light;-webkit-text-size-adjust:100%}
 body{margin:0}
 [hidden]{display:none!important}
 img{max-width:100%}
-body{background:var(--bg);color:var(--ink);font:400 17px/1.5 var(--display);padding-inline:16px;padding-block:20px 72px}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--display);-webkit-font-smoothing:antialiased;padding-inline:16px;padding-block:20px 72px}
 .wrap{max-width:680px;margin:0 auto;display:grid;gap:36px}
 .wrap>*{min-width:0}
 h1,h2,h3{margin:0;text-wrap:balance;line-height:1.08}
@@ -65,7 +65,7 @@ section{display:grid;gap:14px}
 .seg{display:inline-flex;border:var(--b);border-radius:var(--r);overflow:hidden;background:var(--surface)}
 .seg button{font:700 .9rem var(--display);padding:7px 12px;border:0;background:transparent;color:var(--ink);cursor:pointer;min-width:44px}
 .seg button+button{border-left:var(--b)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg button[aria-pressed="true"]{background:var(--sel);color:var(--on-sel)}
 .seg button:focus-visible{outline:3px solid var(--accent);outline-offset:-5px}
 
 /* hero */
@@ -98,7 +98,8 @@ section{display:grid;gap:14px}
 .head{display:flex;align-items:center;gap:14px}
 .num{flex:none;width:40px;height:40px;border:var(--b);border-radius:var(--r);display:grid;place-items:center;font-weight:700;font-variant-numeric:tabular-nums}
 .head h3{font-size:1.5rem;font-weight:700;flex:1;min-width:0}
-.pill{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:var(--b);border-radius:99px;padding:3px 10px;white-space:nowrap}
+.pill{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:var(--b);border-radius:99px;padding:4px 11px 4px 9px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.pill svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .steps{margin:0;padding-left:1.3em;display:grid;gap:6px}
 .steps li::marker{font-weight:700}
 .note{border:var(--b);border-radius:var(--r);padding:10px 14px;background:var(--bg);font-size:.95rem}
@@ -109,13 +110,13 @@ section{display:grid;gap:14px}
 .ops dd{margin:0;min-width:0}
 .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .btn{font:700 1rem var(--display);display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:var(--b);border-radius:var(--r);background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer;overflow-wrap:anywhere;transition:transform .12s,box-shadow .12s}
-.btn.primary{background:var(--accent);color:var(--on-accent)}
-.btn:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--line)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--line)}
 .btn:active{transform:none;box-shadow:none}
 .btn:focus-visible,.copy:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .mail{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;border:var(--b);border-radius:var(--r);padding:6px 6px 6px 12px;min-width:0;max-width:100%}
 .mail code{font:500 .92rem var(--mono);user-select:all;overflow-wrap:anywhere}
-.copy{font:700 .85rem var(--display);border:var(--b);border-radius:6px;background:var(--ink);color:var(--bg);padding:4px 10px;cursor:pointer}
+.copy{font:700 .85rem var(--display);border:var(--b);border-radius:6px;background:var(--sel);color:var(--on-sel);padding:4px 10px;cursor:pointer}
 
 /* done toggle with a real box */
 .check .box{width:20px;height:20px;border:2px solid currentColor;border-radius:5px;display:grid;place-items:center;flex:none}
@@ -135,7 +136,7 @@ section{display:grid;gap:14px}
 .plain{list-style:none;margin:0;padding:0;display:grid;background:var(--surface);border:var(--b);border-radius:var(--r)}
 .plain li{padding:14px 18px}
 .plain li+li{border-top:var(--b)}
-.plain a{color:var(--accent);font-weight:700}
+.plain a{color:var(--link);font-weight:700}
 
 /* template */
 .tpl{display:grid;gap:12px;background:var(--surface);border:var(--b);border-radius:var(--r);padding:18px}
@@ -150,7 +151,7 @@ details p+p{margin-top:10px}
 
 .foot{display:grid;gap:14px;color:var(--muted);font-size:.95rem;border-top:var(--b);padding-top:24px}
 .foot strong{color:var(--ink)}
-.foot a{color:var(--accent);font-weight:700}
+.foot a{color:var(--link);font-weight:700}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.btn:hover{transform:none}}
 @media (max-width:420px){.head h3{font-size:1.3rem}.card{padding:16px}.hero-row{gap:12px}.top .seg button{padding:6px 9px;min-width:0;font-size:.85rem}.toggles{gap:6px}.mark{font-size:1.08rem}.mark .sudd{width:32px;height:26px}}
 </style>
@@ -269,7 +270,7 @@ details p+p{margin-top:10px}
 <script>
 /* ---------- content ---------- */
 const SITES = [
-  {id:"ratsit", name:"Ratsit", tag:{sv:"Upp till 24 h",en:"Up to 24 h"},
+  {id:"ratsit", name:"Ratsit", tag:{sv:"Upp till 24 h",en:"Up to 24 h"}, icon:"clock", tagNo:{sv:"Via mejl",en:"By email"}, iconNo:"mail",
    bankid:{link:["https://www.ratsit.se/tabort","ratsit.se/tabort"],
      steps:{sv:["Öppna direktlänken. Sidan finns inte i menyn.","Kryssa i rutan under <b>Villkor</b>.","Tryck på <b>Ta bort dig från Ratsit</b> och legitimera dig med BankID."],
             en:["Open the direct link. The page is not in the site menu.","Tick the box under <b>Villkor</b> (Terms).","Press <b>Ta bort dig från Ratsit</b> and identify with BankID."]}},
@@ -277,7 +278,7 @@ const SITES = [
      steps:{sv:["Använd kontaktformuläret eller mejla och be att bli borttagen."],en:["Use the contact form or email them and ask to be removed."]}},
    note:{sv:"Dyker du upp igen, till exempel efter ett årsskifte? Ta en skärmdump och skicka en skriftlig GDPR-begäran till <b>gdpr@ratsit.se</b>, inte till kundtjänst. Mallen finns längre ner.",
          en:"Showing up again, for example after New Year? Take a screenshot and send a written GDPR request to <b>gdpr@ratsit.se</b>, not to customer service. The template is further down."}},
-  {id:"mrkoll", name:"MrKoll", tag:{sv:"Direkt",en:"Instant"},
+  {id:"mrkoll", name:"MrKoll", tag:{sv:"Direkt",en:"Instant"}, icon:"bolt", tagNo:{sv:"Via mejl",en:"By email"}, iconNo:"mail",
    bankid:{link:["https://mrkoll.se/om/ta-bort/","mrkoll.se/om/ta-bort"],
      steps:{sv:["Scrolla längst ner på sidan.","Tryck på rutan <b>Starta BankID och ta bort mig</b>.","Legitimera dig med BankID. Du tas bort direkt."],
             en:["Scroll to the bottom of the page.","Press the box <b>Starta BankID och ta bort mig</b>.","Identify with BankID. You are removed right away."]}},
@@ -285,28 +286,28 @@ const SITES = [
      steps:{sv:["Mejla och be att bli borttagen.","De vill kontrollera vem du är, så fråga hur det går till utan BankID."],
             en:["Email them and ask to be removed.","They want to verify who you are, so ask how to do that without BankID."]}},
    warn:{sv:"Knappen ser ut som en sökruta. Det är den du ska trycka på.",en:"The button looks like a search field. That is the one to press."}},
-  {id:"hitta", name:"Hitta", tag:{sv:"BankID",en:"BankID"},
+  {id:"hitta", name:"Hitta", tag:{sv:"BankID",en:"BankID"}, icon:"id", tagNo:{sv:"Via chatt",en:"By chat"}, iconNo:"chat",
    bankid:{link:["https://www.hitta.se/kontakta-oss/ta-bort-kontaktsida","hitta.se/…/ta-bort-kontaktsida"],
      steps:{sv:["Sök fram dig själv.","Tryck på <b>Ta bort</b>.","Logga in med BankID."],en:["Search for yourself.","Press <b>Ta bort</b> (Remove).","Log in with BankID."]}},
    nobankid:{link:["https://support.hitta.se","support.hitta.se"],
      steps:{sv:["Öppna chatten på supportsidan och be att bli borttagen."],en:["Open the chat on the support page and ask to be removed."]}},
    note:{sv:"Hitta får telefonnummer från operatörerna och kan publicera dig igen om du inte har hemligt nummer. Se steg 8.",
          en:"Hitta gets phone numbers from the operators and can list you again unless your number is unlisted. See step 8."}},
-  {id:"merinfo", name:"Merinfo", tag:{sv:"BankID",en:"BankID"},
+  {id:"merinfo", name:"Merinfo", tag:{sv:"BankID",en:"BankID"}, icon:"id", tagNo:{sv:"Blankett",en:"Form"}, iconNo:"doc",
    bankid:{link:["https://www.merinfo.se/ta-bort-mina-uppgifter","merinfo.se/ta-bort-mina-uppgifter"],
      steps:{sv:["Kryssa i rutan och tryck på <b>Gå vidare</b>.","Legitimera dig med BankID.","Välj <b>Radera min profil helt</b>."],
             en:["Tick the box and press <b>Gå vidare</b> (Continue).","Identify with BankID.","Choose <b>Radera min profil helt</b> (Delete my profile completely)."]}},
    nobankid:{link:["https://www.merinfo.se/ta-bort-mina-uppgifter","merinfo.se/ta-bort-mina-uppgifter"], email:"info@merinfo.se",
      steps:{sv:["Fyll i deras blankett.","Mejla blanketten tillsammans med en kopia på din legitimation."],en:["Fill in their form.","Email the form together with a copy of your ID."]}},
    warn:{sv:"Tryck inte på <b>Återaktivera profil</b> efteråt.",en:"Do not press <b>Återaktivera profil</b> (Reactivate profile) afterwards."}},
-  {id:"eniro", name:"Eniro", tag:{sv:"BankID",en:"BankID"},
+  {id:"eniro", name:"Eniro", tag:{sv:"BankID",en:"BankID"}, icon:"id", tagNo:{sv:"Via mejl",en:"By email"}, iconNo:"mail",
    bankid:{link:["https://uppdatera.eniro.se/person","uppdatera.eniro.se/person"],
      steps:{sv:["Sök fram dig själv.","Logga in med BankID.","Tryck på <b>Dölj mig</b> och sedan <b>Ja, dölj</b>."],en:["Search for yourself.","Log in with BankID.","Press <b>Dölj mig</b> (Hide me), then <b>Ja, dölj</b> (Yes, hide)."]}},
    nobankid:{email:"privatpersoner@eniro.com",
      steps:{sv:["Mejla och be att bli dold."],en:["Email them and ask to be hidden."]}},
    note:{sv:"Eniro får också nummer från operatörerna. Hemligt nummer i steg 8 gör att du inte dyker upp igen den vägen.",
          en:"Eniro also gets numbers from the operators. An unlisted number (step 8) keeps you from reappearing that way."}},
-  {id:"birthday", name:"Birthday", tag:{sv:"Via mejl",en:"By email"},
+  {id:"birthday", name:"Birthday", tag:{sv:"Via mejl",en:"By email"}, icon:"mail",
    bankid:{email:"info@birthday.se",
      steps:{sv:["Mejla och be att bli borttagen.","Du får en länk till <b>Mina Uppgifter</b>. Logga in där med BankID och ta bort dig."],
             en:["Email them and ask to be removed.","You get a link to <b>Mina Uppgifter</b> (My details). Log in with BankID and remove yourself."]}},
@@ -315,19 +316,30 @@ const SITES = [
    warn:{sv:"Tacka nej till tilläggen för 99 kr om året. De behövs inte.",en:"Decline the 99 SEK per year add-ons. You do not need them."}}
 ];
 const AFTER = [
-  {id:"google", name:"Google", tag:{sv:"Google-konto",en:"Google account"},
+  {id:"google", name:"Google", tag:{sv:"Google-konto",en:"Google account"}, icon:"user",
    all:{link:["https://myactivity.google.com/results-about-you",{sv:"Resultat om dig",en:"Results about you"}],
      steps:{sv:["Sök på ditt för- och efternamn på Google.","Tryck på de tre prickarna vid varje träff som visar din adress, även gamla träffar till sidor där du redan tagits bort.","Välj <b>Ta bort resultat</b>, sedan <b>Mina personliga uppgifter visas och det vill jag inte</b> och sist <b>Kontaktuppgifter</b>."],
             en:["Search Google for your first and last name.","Press the three dots next to every result that shows your address, including old results for pages you have already been removed from.","Choose <b>Remove result</b>, then <b>It shows my personal contact info</b>, then <b>Contact info</b>."]}},
    note:{sv:"Slå också på <b>Resultat om dig</b> i ditt Google-konto (Data och integritet). Där lägger du in dina kontaktuppgifter och kan begära att träffar som visar dem tas bort.",
          en:"Also turn on <b>Results about you</b> in your Google account (Data &amp; privacy). Add your contact details there and request removal of results that show them."}},
-  {id:"operator", name:{sv:"Hemligt nummer",en:"Unlisted number"}, tag:{sv:"Viktigast",en:"Most important"},
+  {id:"operator", name:{sv:"Hemligt nummer",en:"Unlisted number"}, tag:{sv:"Viktigast",en:"Most important"}, icon:"star",
    all:{steps:{sv:["Utan hemligt nummer skickar operatören ditt nummer till nummerupplysningen, och sajterna kan publicera dig igen.","Ändra inställningen hos din operatör:"],
                en:["Without an unlisted number your operator sends it to directory services, and the sites can list you again.","Change the setting with your operator:"]}},
      ops:{sv:[["Telia","Du listas om du inte väljer bort det. Mitt Telia › Inställningar › Samtalsinställningar."],["Tele2","Mitt Tele2 › välj hemligt endast hos nummerupplysningen."],["Tre, Telenor","Listar bara med samtycke. Ta tillbaka samtycket om du gett det."],["Andra","Kolla Mina sidor eller fråga kundtjänst."]],
           en:[["Telia","You are listed unless you opt out. Mitt Telia › Inställningar › Samtalsinställningar."],["Tele2","Mitt Tele2 › choose unlisted with directory services only."],["Tre, Telenor","Only list you with consent. Withdraw it if you gave it."],["Others","Check your account pages or ask customer service."]]}}
 ];
 const TOTAL = SITES.length + AFTER.length;
+const ICONS = {
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  bolt:'<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>',
+  id:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c1-2 5-2 6 0M15 10h3M15 14h3"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  chat:'<path d="M4 5h16v11H10l-6 4z"/>',
+  doc:'<path d="M6 3h9l4 4v14H6zM15 3v4h4M9 12h6M9 16h6"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 14.5-4.5 16 0"/>',
+  star:'<path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/>'
+};
+const icon = k => k ? `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>` : "";
 
 const T = {
   light:{sv:"Ljust",en:"Light"}, dark:{sv:"Mörkt",en:"Dark"},
@@ -344,10 +356,10 @@ const T = {
   tplTitle:{sv:"Mall: GDPR-begäran",en:"Template: GDPR request"},
   count:{sv:(n)=>`${n} av ${TOTAL} klara`,en:(n)=>`${n} of ${TOTAL} done`}, allDone:{sv:"Alla klara",en:"All done"},
   secSites:{sv:"Sajterna",en:"The sites"}, secAfter:{sv:"Sedan",en:"Then"},
-  secStay:{sv:"Så håller du dig borta",en:"Staying off"},
+  secStay:{sv:"Så håller du dig borta",en:"Staying removed"},
   secMail:{sv:"Mindre reklam i brevlådan",en:"Less junk mail"}, optional:{sv:"Valfritt",en:"Optional"},
   secFaq:{sv:"Frågor",en:"Questions"}, moreQ:{sv:"Finns det fler sajter?",en:"Are there more sites?"},
-  done:{sv:"Klar",en:"Done"}, markDone:{sv:"Markera som klar",en:"Mark as done"}, undo:{sv:"Ångra",en:"Undo"},
+  done:{sv:"Klar",en:"Done"}, markDone:{sv:"Markera som klar",en:"Mark as done"}, 
   copy:{sv:"Kopiera",en:"Copy"}, copied:{sv:"Kopierad",en:"Copied"},
   tip:{sv:"Tips",en:"Tip"}, obs:{sv:"Obs",en:"Note"},
   stay:{sv:[
@@ -389,8 +401,8 @@ Kind regards
   tplCopy:{sv:"Kopiera mallen",en:"Copy template"}, tplCopied:{sv:"Mallen kopierad",en:"Template copied"},
   mail:{sv:[
       "<b>NIX adresserat.</b> Stoppar adresserad reklam från företag du inte är kund hos. Anmäl dig med BankID eller pappersblankett. Tar upp till tre månader och följer med vid flytt. <a href='https://nixa.nixadresserat.se' target='_blank' rel='noopener'>nixa.nixadresserat.se ↗</a>",
-      "<b>Reklamspärr i SPAR.</b> Stoppar att statens adressregister lämnar ut din adress för reklam.",
-      "<b>Nej tack till reklam-dekal.</b> Sätt den på brevlådan för att stoppa reklam utan ditt namn.",
+      "<b>Reklamspärr i SPAR.</b> Gör att statens adressregister inte lämnar ut din adress för reklam.",
+      "<b>Dekalen \"Nej tack till reklam\".</b> Sätt den på brevlådan för att stoppa reklam utan ditt namn.",
       "<b>Företag du är kund hos.</b> Säg till dem direkt att sluta skicka reklam."],
     en:[
       "<b>NIX adresserat.</b> Stops addressed ads from companies you are not a customer of. Sign up with BankID or a paper form. Takes up to three months and follows you when you move. <a href='https://nixa.nixadresserat.se' target='_blank' rel='noopener'>nixa.nixadresserat.se ↗</a>",
@@ -420,20 +432,20 @@ let state = Object.assign({mode:"bankid",done:{},lang:"sv",theme:null}, load());
 if(!state.done) state.done = {};
 
 const L = v => (v && typeof v === "object" && !Array.isArray(v) && ("sv" in v)) ? v[state.lang] : v;
-const sysDark = () => { try{return matchMedia("(prefers-color-scheme: dark)").matches}catch(e){return false} };
-const currentTheme = () => state.theme || (sysDark() ? "dark" : "light");
+const currentTheme = () => state.theme === "dark" ? "dark" : "light";
 
 /* ---------- render ---------- */
 function card(item, n){
   const v = item.all || item[state.mode];
+  const noBank = state.mode === "nobankid" && item.tagNo;
   const done = !!state.done[item.id];
   const li = document.createElement("li");
   li.className = "card" + (done ? " is-done" : "");
   if(done){
-    li.innerHTML = `<div class="head"><span class="num" aria-hidden="true">✓</span><h3>${L(item.name)}</h3><button type="button" class="btn check small" data-id="${item.id}" aria-pressed="true"><span class="box" aria-hidden="true"></span><span>${L(T.done)}</span></button></div>`;
+    li.innerHTML = `<div class="head"><span class="num" aria-hidden="true">✓</span><h3>${L(item.name)}</h3><button type="button" class="btn check small" data-id="${item.id}" aria-pressed="true" aria-label="${L(T.done)}: ${L(item.name)}"><span class="box" aria-hidden="true"></span><span>${L(T.done)}</span></button></div>`;
     return li;
   }
-  let h = `<div class="head"><span class="num" aria-hidden="true">${done ? "✓" : n}</span><h3>${L(item.name)}</h3><span class="pill">${done ? L(T.done) : L(item.tag)}</span></div><div class="body">`;
+  let h = `<div class="head"><span class="num" aria-hidden="true">${done ? "✓" : n}</span><h3>${L(item.name)}</h3><span class="pill">${noBank ? icon(item.iconNo) + L(item.tagNo) : icon(item.icon) + L(item.tag)}</span></div><div class="body">`;
   h += `<ol class="steps">${L(v.steps).map(s=>`<li>${s}</li>`).join("")}</ol>`;
   const ops = v.ops || item.ops;
   if(ops) h += `<dl class="ops">${L(ops).map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>`;
@@ -445,7 +457,7 @@ function card(item, n){
     if(v.email) h += `<span class="mail"><code>${v.email}</code><button type="button" class="copy" data-copy="${v.email}">${L(T.copy)}</button></span>`;
     h += `</div>`;
   }
-  h += `</div><div class="actions"><button type="button" class="btn check" data-id="${item.id}" aria-pressed="${done}"><span class="box" aria-hidden="true"></span><span>${done ? L(T.done) : L(T.markDone)}</span></button></div>`;
+  h += `</div><div class="actions"><button type="button" class="btn check" data-id="${item.id}" aria-pressed="${done}" aria-label="${L(T.markDone)}: ${L(item.name)}"><span class="box" aria-hidden="true"></span><span>${done ? L(T.done) : L(T.markDone)}</span></button></div>`;
   li.innerHTML = h;
   return li;
 }
@@ -470,7 +482,11 @@ function render(){
   resetIdle();
 }
 
-function applyTheme(){ if(state.theme) document.documentElement.setAttribute("data-theme", state.theme); }
+function applyTheme(){
+  const t = currentTheme();
+  document.documentElement.setAttribute("data-theme", t);
+  const m = document.querySelector('meta[name="theme-color"]'); if(m) m.content = t === "dark" ? "#12161F" : "#EDF0F4";
+}
 
 /* ---------- copy ---------- */
 function copyText(text, btn, okLabel, idleLabel, selectEl){
@@ -486,11 +502,12 @@ function downloadReminder(){
   const end = new Date(d); end.setDate(end.getDate()+1);
   const stamp = new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
   const esc = s => s.replace(/[\\;,]/g, m => "\\"+m);
+  const fold = line => { const out = []; let cur = ""; for(const ch of line){ if(new TextEncoder().encode(cur+ch).length > (out.length ? 74 : 75)){ out.push(cur); cur = ch; } else cur += ch; } out.push(cur); return out.join("\r\n "); };
   const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Sudda mig//SV","BEGIN:VEVENT",
     "UID:"+Date.now()+"@suddamig","DTSTAMP:"+stamp,"DTSTART;VALUE=DATE:"+ymd(d),"DTEND;VALUE=DATE:"+ymd(end),
     "SUMMARY:"+esc(L(T.icsTitle)),"DESCRIPTION:"+esc(L(T.icsDesc)),"URL:"+location.href.split("#")[0],
     "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc(L(T.icsTitle)),"TRIGGER:PT9H","END:VALARM",
-    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+    "END:VEVENT","END:VCALENDAR"].map(fold).join("\r\n");
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([ics],{type:"text/calendar"}));
   a.download = "sudda-mig-paminnelse.ics";
@@ -514,7 +531,6 @@ document.addEventListener("click", e => {
   if(t.closest(".remind")){ downloadReminder(); return; }
   if(t.id === "tpl-copy"){ copyText(L(T.tpl), t, L(T.tplCopied), L(T.tplCopy), document.getElementById("tpl")); }
 });
-try{ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ()=>{ if(!state.theme) render(); }); }catch(e){}
 
 const resetBox = document.getElementById("reset");
 function resetIdle(){
