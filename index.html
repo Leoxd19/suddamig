@@ -78,6 +78,11 @@ section{display:grid;gap:14px}
 .hero .sudd.rub{animation:rub 1.1s ease-in-out .4s 1}
 @keyframes rub{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px) rotate(-3deg)}45%{transform:translateX(9px) rotate(2deg)}70%{transform:translateX(-6px) rotate(-2deg)}}
 
+/* intro */
+.intro{gap:10px;padding-block:4px}
+.intro p{font-size:1.08rem;max-width:58ch;line-height:1.6}
+.intro .sig{font-weight:700;font-size:1rem}
+
 /* bankid question */
 .ask{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--surface);border:var(--b);border-radius:var(--r);padding:12px 12px 12px 16px}
 .ask p{font-weight:700}
@@ -206,6 +211,11 @@ details p+p{margin-top:10px}
     </div>
   </header>
 
+  <section class="intro">
+    <h2 data-i18n="introTitle"></h2>
+    <p data-i18n="intro"></p>
+  </section>
+
   <div class="ask">
     <p data-i18n="askBankid"></p>
     <div class="seg" role="group" id="seg-mode">
@@ -291,8 +301,8 @@ const SITES = [
      steps:{sv:["Sök fram dig själv.","Tryck på <b>Ta bort</b>.","Logga in med BankID."],en:["Search for yourself.","Press <b>Ta bort</b> (Remove).","Log in with BankID."]}},
    nobankid:{link:["https://support.hitta.se","support.hitta.se"],
      steps:{sv:["Öppna chatten på supportsidan och be att bli borttagen."],en:["Open the chat on the support page and ask to be removed."]}},
-   note:{sv:"Hitta får telefonnummer från operatörerna och kan publicera dig igen om du inte har hemligt nummer. Se steg 8.",
-         en:"Hitta gets phone numbers from the operators and can list you again unless your number is unlisted. See step 8."}},
+   note:{sv:"Hitta får telefonnummer från operatörerna och kan publicera dig igen om du inte har hemligt nummer. Se steg 9.",
+         en:"Hitta gets phone numbers from the operators and can list you again unless your number is unlisted. See step 9."}},
   {id:"merinfo", name:"Merinfo", tag:{sv:"BankID",en:"BankID"}, icon:"id", tagNo:{sv:"Blankett",en:"Form"}, iconNo:"doc",
    bankid:{link:["https://www.merinfo.se/ta-bort-mina-uppgifter","merinfo.se/ta-bort-mina-uppgifter"],
      steps:{sv:["Kryssa i rutan och tryck på <b>Gå vidare</b>.","Legitimera dig med BankID.","Välj <b>Radera min profil helt</b>."],
@@ -305,15 +315,20 @@ const SITES = [
      steps:{sv:["Sök fram dig själv.","Logga in med BankID.","Tryck på <b>Dölj mig</b> och sedan <b>Ja, dölj</b>."],en:["Search for yourself.","Log in with BankID.","Press <b>Dölj mig</b> (Hide me), then <b>Ja, dölj</b> (Yes, hide)."]}},
    nobankid:{email:"privatpersoner@eniro.com",
      steps:{sv:["Mejla och be att bli dold."],en:["Email them and ask to be hidden."]}},
-   note:{sv:"Eniro får också nummer från operatörerna. Hemligt nummer i steg 8 gör att du inte dyker upp igen den vägen.",
-         en:"Eniro also gets numbers from the operators. An unlisted number (step 8) keeps you from reappearing that way."}},
+   note:{sv:"Eniro får också nummer från operatörerna. Hemligt nummer i steg 9 gör att du inte dyker upp igen den vägen.",
+         en:"Eniro also gets numbers from the operators. An unlisted number (step 9) keeps you from reappearing that way."}},
   {id:"birthday", name:"Birthday", tag:{sv:"Via mejl",en:"By email"}, icon:"mail",
    bankid:{email:"info@birthday.se",
      steps:{sv:["Mejla och be att bli borttagen.","Du får en länk till <b>Mina Uppgifter</b>. Logga in där med BankID och ta bort dig."],
             en:["Email them and ask to be removed.","You get a link to <b>Mina Uppgifter</b> (My details). Log in with BankID and remove yourself."]}},
    nobankid:{email:"info@birthday.se",
      steps:{sv:["Mejla och be att bli borttagen.","Fråga hur de kontrollerar vem du är utan BankID."],en:["Email them and ask to be removed.","Ask how they verify who you are without BankID."]}},
-   warn:{sv:"Tacka nej till tilläggen för 99 kr om året. De behövs inte.",en:"Decline the 99 SEK per year add-ons. You do not need them."}}
+   warn:{sv:"Tacka nej till tilläggen för 99 kr om året. De behövs inte.",en:"Decline the 99 SEK per year add-ons. You do not need them."}},
+  {id:"upplysning", name:"Upplysning", tag:{sv:"Pausad",en:"Paused"}, icon:"pause",
+   all:{link:["https://www.upplysning.se/kontakta-oss","upplysning.se/kontakta-oss"],
+     steps:{sv:["Upplysning har pausat sin sökning, men skriver att de vill komma tillbaka.","Skicka en GDPR-begäran via kontaktformuläret, så att dina uppgifter är raderade innan sajten öppnar igen. Använd mallen längre ner."],
+            en:["Upplysning has paused its search, but says it wants to come back.","Send a GDPR erasure request through the contact form, so your details are deleted before the site reopens. Use the template further down."]}},
+   note:{sv:"Spara bekräftelsen. Upplysning är en av sajterna IMY granskar.",en:"Save the confirmation. Upplysning is one of the sites IMY is reviewing."}}
 ];
 const AFTER = [
   {id:"google", name:"Google", tag:{sv:"Google-konto",en:"Google account"}, icon:"user",
@@ -337,21 +352,25 @@ const ICONS = {
   chat:'<path d="M4 5h16v11H10l-6 4z"/>',
   doc:'<path d="M6 3h9l4 4v14H6zM15 3v4h4M9 12h6M9 16h6"/>',
   user:'<circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 14.5-4.5 16 0"/>',
+  pause:'<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>',
   star:'<path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/>'
 };
 const icon = k => k ? `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>` : "";
 
 const T = {
   light:{sv:"Ljust",en:"Light"}, dark:{sv:"Mörkt",en:"Dark"},
-  stamp:{sv:"Stegen kontrollerade 5-6 okt 2026",en:"Steps checked 5-6 Oct 2026"},
+  stamp:{sv:"Stegen kontrollerade vecka 41, 2026",en:"Steps checked week 41, 2026"},
   h1:{sv:"Ta bort dig från upplysnings&shy;sajterna.",en:"Remove yourself from Swedish people-search sites."},
   lead:{sv:"Ratsit, Hitta, MrKoll, Merinfo, Eniro och Birthday visar din adress och ditt nummer för vem som helst. <strong>Det är gratis att ta bort sig och tar ungefär 20 minuter med BankID.</strong> Gå igenom listan uppifrån och ner.",
         en:"Ratsit, Hitta, MrKoll, Merinfo, Eniro and Birthday show your address and phone number to anyone. <strong>Removing yourself is free and takes about 20 minutes with BankID.</strong> Work through the list from top to bottom."},
+  introTitle:{sv:"Varför det här spelar roll",en:"Why this matters"},
+  intro:{sv:"Vem som kan se var du bor borde vara ditt beslut. I dag räcker ett namn för att få fram någons adress, telefonnummer och vilka de bor med, gratis och på några sekunder. Det angår alla: den som lämnat en partner, den som fått hot i jobbet och den som bara vill få vara i fred. Att uppgifter är offentliga borde inte betyda att de ligger ute för vem som helst. Jag byggde den här sidan för att det ska vara enkelt att ta tillbaka den kontrollen.",
+         en:"Who can see where you live should be your decision. Today a name is enough to find someone's address, phone number and who they live with, for free and in seconds. That concerns everyone: someone who has left a partner, someone threatened at work, and someone who simply wants to be left alone. Public records should not mean posted for anyone to browse. I built this page to make taking back that control simple."},
   askBankid:{sv:"Har du BankID?",en:"Do you have BankID?"}, yes:{sv:"Ja",en:"Yes"}, no:{sv:"Nej",en:"No"},
   finTitle:{sv:"Du är borttagen.",en:"You are off the sites."}, finText:{sv:"Sök på dig själv om ett halvår, och direkt efter en flytt eller ett nytt nummer.",en:"Search for yourself in six months, and right after moving or getting a new number."},
   remind:{sv:"Påminn mig om ett halvår",en:"Remind me in six months"},
   icsTitle:{sv:"Sudda mig: sök på dig själv igen",en:"Sudda mig: search for yourself again"},
-  icsDesc:{sv:"Kolla Ratsit, Hitta, MrKoll, Merinfo, Eniro och Birthday igen. Har du flyttat eller bytt nummer? Gå igenom hela listan.",en:"Check Ratsit, Hitta, MrKoll, Merinfo, Eniro and Birthday again. Moved or got a new number? Go through the whole list."},
+  icsDesc:{sv:"Kolla Ratsit, Hitta, MrKoll, Merinfo, Eniro, Birthday och Upplysning igen. Har du flyttat eller bytt nummer? Gå igenom hela listan.",en:"Check Ratsit, Hitta, MrKoll, Merinfo, Eniro, Birthday and Upplysning again. Moved or got a new number? Go through the whole list."},
   report:{sv:"<strong>Hittat ett fel?</strong> Sajterna ändrar sina steg ibland. <a href='https://github.com/Leoxd19/suddamig/issues' target='_blank' rel='noopener'>Rapportera det på GitHub</a>.",en:"<strong>Found a mistake?</strong> The sites change their steps now and then. <a href='https://github.com/Leoxd19/suddamig/issues' target='_blank' rel='noopener'>Report it on GitHub</a>."},
   tplTitle:{sv:"Mall: GDPR-begäran",en:"Template: GDPR request"},
   count:{sv:(n)=>`${n} av ${TOTAL} klara`,en:(n)=>`${n} of ${TOTAL} done`}, allDone:{sv:"Alla klara",en:"All done"},
@@ -409,8 +428,8 @@ Kind regards
       "<b>Advertising block in SPAR.</b> Stops the state address register from handing out your address for advertising.",
       "<b>\"Nej tack till reklam\" sticker.</b> Put it on your mailbox to stop leaflets without your name.",
       "<b>Companies you are a customer of.</b> Tell them directly to stop sending ads."]},
-  more:{sv:"<p>Ja, till exempel Upplysning, Lexbase, Biluppgifter och Krimfup. Guiden har inga kontrollerade steg för dem än, men GDPR-mallen ovan går att använda.</p>",
-        en:"<p>Yes, for example Upplysning, Lexbase, Biluppgifter and Krimfup. This guide has no checked steps for them yet, but the GDPR template above works.</p>"},
+  more:{sv:"<p>Ja, till exempel Lexbase, Biluppgifter och Krimfup. Guiden har inga kontrollerade steg för dem än, men GDPR-mallen ovan går att använda.</p>",
+        en:"<p>Yes, for example Lexbase, Biluppgifter and Krimfup. This guide has no checked steps for them yet, but the GDPR template above works.</p>"},
   whyQ:{sv:"Varför måste jag göra det här själv?",en:"Why do I have to do this myself?"},
   whyA:{sv:"<p>Sajterna har utgivningsbevis, som ger dem samma grundlagsskydd som en tidning. Därför har de hävdat att GDPR inte gäller det de publicerar.</p><p>Den 9 juli 2026 slog EU-domstolen (mål C-199/24) fast att ett utgivningsbevis inte i sig undantar en sajt från GDPR. Domen gällde Lexbase. Om samma sak gäller sajter som visar adresser och telefonnummer är inte prövat än.</p><p>IMY granskar bland andra MrKoll och Upplysning men utreder inte enskilda klagomål under tiden. Regeringen ändrar inte grundlagen just nu, utan ska utreda om sajterna kan regleras i vanlig lag. Tills vidare tar du bort dig själv, sajt för sajt.</p><p>Dina uppgifter finns kvar hos Skatteverket och kan begäras ut av vem som helst, men Skatteverket lägger inte ut dem på nätet.</p>",
         en:"<p>The sites hold a publishing certificate (utgivningsbevis), which gives them the same constitutional protection as a newspaper. That is why they have claimed the GDPR does not apply to what they publish.</p><p>On 9 July 2026 the Court of Justice of the EU ruled (case C-199/24) that a publishing certificate does not in itself exempt a site from the GDPR. The case concerned Lexbase. Whether the same applies to sites that show addresses and phone numbers has not been tested yet.</p><p>The Swedish data protection authority (IMY) is reviewing MrKoll and Upplysning among others, but is not investigating individual complaints in the meantime. The government is not changing the constitution for now and will instead look into regulating the sites through ordinary law. Until then, you remove yourself, site by site.</p><p>Your details remain with the Swedish Tax Agency and anyone can request them, but the agency does not publish them online.</p>"},
