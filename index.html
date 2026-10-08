@@ -24,11 +24,12 @@
 :root{
   --bg:#EDF0F4; --surface:#FFFFFF; --ink:#0B1220; --muted:#4A5468;
   --accent:#2541E8; --on-accent:#FFFFFF;
-  --done:#0F9D58; --on-done:#FFFFFF;
+  --done:#0B7A43; --on-done:#FFFFFF;
   --warn:#FFD43B; --on-warn:#0B1220;
   --display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --line:#0B1220; --sel:#0B1220; --on-sel:#EDF0F4; --link:#2541E8;
+  --soft:#2A3344; --tint:#E2E7FB; --tint-line:#0B1220;
   --b:2px solid var(--line); --r:8px;
 }
 /* Light is the default for everyone. Dark only applies when the visitor picks it. */
@@ -37,6 +38,7 @@
   --accent:#8EA2FF; --on-accent:#0B1220; --done:#4CD787; --on-done:#0B1220;
   --warn:#F2CD52; --on-warn:#14110A;
   --line:#4A5470; --sel:#8EA2FF; --on-sel:#0B1220; --link:#A9B8FF;
+  --soft:#D5DAE4; --tint:#1E2640; --tint-line:#56619A;
   color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -73,16 +75,23 @@ section{display:grid;gap:14px}
 /* hero */
 .hero{display:grid;gap:16px}
 .stamp{font:500 .82rem var(--mono);color:var(--muted)}
-.hero-row{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
-.lead{font-size:1.15rem;color:var(--muted);max-width:52ch;min-width:0}
+.hero-head{display:grid;grid-template-columns:1fr auto;grid-template-areas:"stamp sudd" "title title";column-gap:16px;row-gap:10px;align-items:end}
+.hero-head .stamp{grid-area:stamp;align-self:center}
+.hero-head .sudd{grid-area:sudd}
+.hero-head h1{grid-area:title;min-width:0}
+@media (max-width:639px){.hero .sudd{width:58px;margin:0}.hero-head .stamp{font-size:.74rem}}
+@media (min-width:640px){.hero-head{grid-template-areas:"stamp sudd" "title sudd";row-gap:14px}.hero-head .stamp{align-self:end}.hero-head .sudd{align-self:end}}
+.lead{font-size:1.15rem;line-height:1.6;color:var(--soft);max-width:56ch}
 .lead strong{color:var(--ink)}
-.hero .sudd{width:clamp(92px,24vw,150px);height:auto;transform-origin:30% 90%}
+.hero .sudd{width:clamp(72px,19vw,140px);height:auto;transform-origin:30% 90%;margin-bottom:4px}
 .hero .sudd.rub{animation:rub 1.1s ease-in-out .4s 1}
 @keyframes rub{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px) rotate(-3deg)}45%{transform:translateX(9px) rotate(2deg)}70%{transform:translateX(-6px) rotate(-2deg)}}
 
 /* intro */
-.intro{gap:10px;padding-block:4px}
-.intro p{font-size:1.08rem;max-width:58ch;line-height:1.6}
+.intro{gap:14px;background:var(--tint);border:var(--b);border-color:var(--tint-line);border-radius:var(--r);padding:22px 22px 24px}
+.intro-body{display:grid;gap:12px;max-width:58ch}
+.intro-body p{font-size:1.05rem;line-height:1.65;color:var(--soft)}
+.intro-body .first{font-size:1.35rem;line-height:1.3;font-weight:700;color:var(--ink);letter-spacing:-.01em;text-wrap:balance}
 
 /* bankid question */
 .ask{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--surface);border:var(--b);border-radius:var(--r);padding:12px 12px 12px 16px}
@@ -106,14 +115,17 @@ section{display:grid;gap:14px}
 .head h3{font-size:1.5rem;font-weight:700;flex:1;min-width:0}
 .pill{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:var(--b);border-radius:99px;padding:4px 11px 4px 9px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
 .pill svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.steps{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.steps{margin:0;padding-left:1.4em;display:grid;gap:8px;line-height:1.55}
+.steps li{padding-left:2px}
 .steps li::marker{font-weight:700}
-.note{border:var(--b);border-radius:var(--r);padding:10px 14px;background:var(--bg);font-size:.95rem}
+.note{border:var(--b);border-radius:var(--r);padding:12px 14px;background:var(--bg);font-size:.97rem;line-height:1.55;display:grid;gap:4px;color:var(--soft)}
+.note b{color:var(--ink)}
 .note.warn{background:var(--warn);color:var(--on-warn);border-color:var(--on-warn)}
-.note .lbl{font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.75rem;margin-right:6px}
-.ops{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0;border:var(--b);border-radius:var(--r);padding:12px 14px}
+.note.warn b{color:var(--on-warn)}
+.note .lbl{font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;display:block}
+.ops{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;margin:0;border:var(--b);border-radius:var(--r);padding:14px 16px;line-height:1.5}
 .ops dt{font-weight:700}
-.ops dd{margin:0;min-width:0}
+.ops dd{margin:0;min-width:0;color:var(--soft)}
 .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .btn{font:700 1rem var(--display);display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:var(--b);border-radius:var(--r);background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer;overflow-wrap:anywhere;transition:transform .12s,box-shadow .12s}
 .btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--line)}
@@ -140,26 +152,32 @@ section{display:grid;gap:14px}
 
 /* plain lists */
 .plain{list-style:none;margin:0;padding:0;display:grid;background:var(--surface);border:var(--b);border-radius:var(--r)}
-.plain li{padding:14px 18px}
+.plain li{padding:16px 18px;line-height:1.55;color:var(--soft)}
+.plain li b{color:var(--ink)}
 .plain li+li{border-top:var(--b)}
 .plain a{color:var(--link);font-weight:700}
 
 /* template */
-.tpl{display:grid;gap:12px;background:var(--surface);border:var(--b);border-radius:var(--r);padding:18px}
+.tpl{display:grid;gap:12px;line-height:1.55;background:var(--surface);border:var(--b);border-radius:var(--r);padding:18px}
 .tpl h3{font-size:1.2rem}
 .tpl pre{margin:0;font:500 .88rem/1.55 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);border:var(--b);border-radius:var(--r);padding:14px}
 
 .faq{display:grid;gap:12px}
-details{background:var(--surface);border:var(--b);border-radius:var(--r);padding:14px 18px}
-summary{font-weight:700;cursor:pointer}
-details[open] summary{margin-bottom:10px}
+details{background:var(--surface);border:var(--b);border-radius:var(--r);padding:16px 18px}
+details>div{max-width:60ch;color:var(--soft);line-height:1.65}
+summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;font-weight:400;flex:none}
+details[open] summary::after{content:"\2212"}
+details[open] summary{margin-bottom:12px}
 details p+p{margin-top:10px}
 
-.foot{display:grid;gap:14px;color:var(--muted);font-size:.95rem;border-top:var(--b);padding-top:24px}
+.foot{display:grid;gap:14px;color:var(--soft);font-size:.97rem;line-height:1.55;border-top:var(--b);padding-top:24px}
 .foot strong{color:var(--ink)}
 .foot a{color:var(--link);font-weight:700}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.btn:hover{transform:none}}
-@media (max-width:420px){.head h3{font-size:1.3rem}.card{padding:16px}.hero-row{gap:12px}.top .seg button{padding:6px 9px;min-width:0;font-size:.85rem}.toggles{gap:6px}.mark{font-size:1.08rem}.mark .sudd{width:32px;height:26px}}
+@media (max-width:480px){.ops{grid-template-columns:1fr;gap:2px}.ops dd+dt{margin-top:10px}}
+@media (max-width:420px){.head h3{font-size:1.3rem}.card{padding:16px}.intro{padding:18px 18px 20px}.intro-body .first{font-size:1.25rem}.top .seg button{padding:6px 9px;min-width:0;font-size:.85rem}.toggles{gap:6px}.mark{font-size:1.08rem}.mark .sudd{width:32px;height:26px}}
 </style>
 <link rel="preload" href="fonts/familjen-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 </head>
@@ -204,17 +222,17 @@ details p+p{margin-top:10px}
   </div>
 
   <header class="hero">
-    <p class="stamp" data-i18n="stamp"></p>
-    <h1 data-i18n="h1"></h1>
-    <div class="hero-row">
-      <p class="lead" data-i18n="lead"></p>
-      <svg class="sudd rub" role="img" aria-label="Sudd"><use href="#sudd"/></svg>
+    <div class="hero-head">
+      <p class="stamp" data-i18n="stamp"></p>
+      <svg class="sudd rub" viewBox="0 0 140 110" role="img" aria-label="Sudd"><use href="#sudd"/></svg>
+      <h1 data-i18n="h1"></h1>
     </div>
+    <p class="lead" data-i18n="lead"></p>
   </header>
 
   <section class="intro">
     <h2 data-i18n="introTitle"></h2>
-    <p data-i18n="intro"></p>
+    <div class="intro-body" data-i18n="intro"></div>
   </section>
 
   <div class="ask">
@@ -240,7 +258,7 @@ details p+p{margin-top:10px}
   </section>
 
   <div class="finished" id="finished" hidden>
-    <svg class="sudd" aria-hidden="true"><use href="#sudd-happy"/></svg>
+    <svg class="sudd" viewBox="0 0 140 110" aria-hidden="true"><use href="#sudd-happy"/></svg>
     <div style="display:grid;gap:10px"><div><p class="big" data-i18n="finTitle"></p><p data-i18n="finText"></p></div><div class="actions"><button type="button" class="btn remind" data-i18n="remind"></button></div></div>
   </div>
 
@@ -365,8 +383,8 @@ const T = {
   lead:{sv:"Ratsit, Hitta, MrKoll, Merinfo, Eniro och Birthday visar din adress och ditt nummer för vem som helst. <strong>Det är gratis att ta bort sig och tar ungefär 20 minuter med BankID.</strong> Gå igenom listan uppifrån och ner.",
         en:"Ratsit, Hitta, MrKoll, Merinfo, Eniro and Birthday show your address and phone number to anyone. <strong>Removing yourself is free and takes about 20 minutes with BankID.</strong> Work through the list from top to bottom."},
   introTitle:{sv:"Varför det här spelar roll",en:"Why this matters"},
-  intro:{sv:"Vem som kan se var du bor borde vara ditt beslut. I dag räcker ett namn för att få fram någons adress, telefonnummer och vilka de bor med, gratis och på några sekunder. Det angår alla: den som lämnat en partner, den som fått hot i jobbet och den som bara vill få vara i fred. Att uppgifter är offentliga borde inte betyda att de ligger ute för vem som helst. Jag byggde den här sidan för att det ska vara enkelt att ta tillbaka den kontrollen.",
-         en:"Who can see where you live should be your decision. Today a name is enough to find someone's address, phone number and who they live with, for free and in seconds. That concerns everyone: someone who has left a partner, someone threatened at work, and someone who simply wants to be left alone. Public records should not mean posted for anyone to browse. I built this page to make taking back that control simple."},
+  intro:{sv:"<p class='first'>Vem som kan se var du bor borde vara ditt beslut.</p><p>I dag räcker ett namn för att få fram någons adress, telefonnummer och vilka de bor med. Gratis, på några sekunder.</p><p>Det angår alla: den som lämnat en partner, den som fått hot i jobbet och den som bara vill få vara i fred. Att uppgifter är offentliga borde inte betyda att de ligger ute för vem som helst.</p><p>Den här sidan gör det enkelt att ta tillbaka den kontrollen.</p>",
+         en:"<p class='first'>Who can see where you live should be your decision.</p><p>Today a name is enough to find someone's address, phone number and who they live with. For free, in seconds.</p><p>That concerns everyone: someone who has left a partner, someone threatened at work, and someone who simply wants to be left alone. Public records should not mean posted for anyone to browse.</p><p>This page makes taking back that control simple.</p>"},
   askBankid:{sv:"Har du BankID?",en:"Do you have BankID?"}, yes:{sv:"Ja",en:"Yes"}, no:{sv:"Nej",en:"No"},
   finTitle:{sv:"Du är borttagen.",en:"You are off the sites."}, finText:{sv:"Sök på dig själv om ett halvår, och direkt efter en flytt eller ett nytt nummer.",en:"Search for yourself in six months, and right after moving or getting a new number."},
   remind:{sv:"Påminn mig om ett halvår",en:"Remind me in six months"},
@@ -432,8 +450,8 @@ Kind regards
   more:{sv:"<p>Ja, till exempel Lexbase, Biluppgifter och Krimfup. Guiden har inga kontrollerade steg för dem än, men GDPR-mallen ovan går att använda.</p>",
         en:"<p>Yes, for example Lexbase, Biluppgifter and Krimfup. This guide has no checked steps for them yet, but the GDPR template above works.</p>"},
   whyQ:{sv:"Varför måste jag göra det här själv?",en:"Why do I have to do this myself?"},
-  whyA:{sv:"<p>Sajterna har utgivningsbevis, som ger dem samma grundlagsskydd som en tidning. Därför har de hävdat att GDPR inte gäller det de publicerar.</p><p>Den 9 juli 2026 slog EU-domstolen (mål C-199/24) fast att ett utgivningsbevis inte i sig undantar en sajt från GDPR. Domen gällde Lexbase. Om samma sak gäller sajter som visar adresser och telefonnummer är inte prövat än.</p><p>IMY granskar bland andra MrKoll och Upplysning men utreder inte enskilda klagomål under tiden. Regeringen ändrar inte grundlagen just nu, utan ska utreda om sajterna kan regleras i vanlig lag. Tills vidare tar du bort dig själv, sajt för sajt.</p><p>Dina uppgifter finns kvar hos Skatteverket och kan begäras ut av vem som helst, men Skatteverket lägger inte ut dem på nätet.</p>",
-        en:"<p>The sites hold a publishing certificate (utgivningsbevis), which gives them the same constitutional protection as a newspaper. That is why they have claimed the GDPR does not apply to what they publish.</p><p>On 9 July 2026 the Court of Justice of the EU ruled (case C-199/24) that a publishing certificate does not in itself exempt a site from the GDPR. The case concerned Lexbase. Whether the same applies to sites that show addresses and phone numbers has not been tested yet.</p><p>The Swedish data protection authority (IMY) is reviewing MrKoll and Upplysning among others, but is not investigating individual complaints in the meantime. The government is not changing the constitution for now and will instead look into regulating the sites through ordinary law. Until then, you remove yourself, site by site.</p><p>Your details remain with the Swedish Tax Agency and anyone can request them, but the agency does not publish them online.</p>"},
+  whyA:{sv:"<p>Sajterna har utgivningsbevis, som ger dem samma grundlagsskydd som en tidning. Därför har de hävdat att GDPR inte gäller det de publicerar.</p><p>Den 9 juli 2026 slog EU-domstolen (mål C&#8209;199/24) fast att ett utgivningsbevis inte i sig undantar en sajt från GDPR. Domen gällde Lexbase. Om samma sak gäller sajter som visar adresser och telefonnummer är inte prövat än.</p><p>IMY granskar bland andra MrKoll och Upplysning men utreder inte enskilda klagomål under tiden. Regeringen ändrar inte grundlagen just nu, utan ska utreda om sajterna kan regleras i vanlig lag. Tills vidare tar du bort dig själv, sajt för sajt.</p><p>Dina uppgifter finns kvar hos Skatteverket och kan begäras ut av vem som helst, men Skatteverket lägger inte ut dem på nätet.</p>",
+        en:"<p>The sites hold a publishing certificate (utgivningsbevis), which gives them the same constitutional protection as a newspaper. That is why they have claimed the GDPR does not apply to what they publish.</p><p>On 9 July 2026 the Court of Justice of the EU ruled (case C&#8209;199/24) that a publishing certificate does not in itself exempt a site from the GDPR. The case concerned Lexbase. Whether the same applies to sites that show addresses and phone numbers has not been tested yet.</p><p>The Swedish data protection authority (IMY) is reviewing MrKoll and Upplysning among others, but is not investigating individual complaints in the meantime. The government is not changing the constitution for now and will instead look into regulating the sites through ordinary law. Until then, you remove yourself, site by site.</p><p>Your details remain with the Swedish Tax Agency and anyone can request them, but the agency does not publish them online.</p>"},
   backQ:{sv:"Kan jag dyka upp igen?",en:"Can I show up again?"},
   backA:{sv:"<p>Ja, det kan hända. Sajterna säger själva att borttagningen håller: Ratsit och Merinfo anger ingen tidsgräns, MrKoll säger att den gäller för gott och Eniros Dölj mig går inte att ångra.</p><p>Det som brukar få folk att dyka upp igen är nya uppgifter. Sajterna köper regelbundet nya utdrag från bland annat SPAR och teleoperatörerna, och en ny adress eller ett nytt nummer kan ge en ny post. Därför: hemligt nummer, en ny koll efter flytten och sparade bekräftelser.</p>",
         en:"<p>Yes, it can happen. The sites themselves say the removal lasts: Ratsit and Merinfo state no time limit, MrKoll says it is permanent and Eniro's Hide me cannot be undone.</p><p>What usually brings people back is new data. The sites regularly buy fresh extracts from sources such as SPAR and the phone operators, and a new address or number can create a new record. So: an unlisted number, a new check after moving, and saved confirmations.</p>"},
@@ -469,8 +487,8 @@ function card(item, n){
   h += `<ol class="steps">${L(v.steps).map(s=>`<li>${s}</li>`).join("")}</ol>`;
   const ops = v.ops || item.ops;
   if(ops) h += `<dl class="ops">${L(ops).map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>`;
-  if(item.warn) h += `<p class="note warn"><span class="lbl">${L(T.obs)}</span>${L(item.warn)}</p>`;
-  if(item.note) h += `<p class="note"><span class="lbl">${L(T.tip)}</span>${L(item.note)}</p>`;
+  if(item.warn) h += `<div class="note warn"><span class="lbl">${L(T.obs)}</span><p>${L(item.warn)}</p></div>`;
+  if(item.note) h += `<div class="note"><span class="lbl">${L(T.tip)}</span><p>${L(item.note)}</p></div>`;
   if(v.link || v.email){
     h += `<div class="actions">`;
     if(v.link) h += `<a class="btn primary" href="${v.link[0]}" target="_blank" rel="noopener">${L(v.link[1])} ↗</a>`;
