@@ -9,8 +9,8 @@ A free step-by-step guide to removing yourself from Swedish people-search sites.
 
 ## Hittat ett fel eller saknar något?
 
-Sajterna ändrar sina flöden ibland. Öppna en [issue](https://github.com/Leoxd19/suddamig/issues) med vilken sajt och vilket steg som inte stämmer.
+Hemsidorna ändrar sina flöden ibland. Öppna en [issue](https://github.com/Leoxd19/suddamig/issues) med vilken hemsida och vilket steg som inte stämmer.
 
-Förslag är också välkomna: fler sajter att ta bort sig från, bättre steg, eller annat som hjälper folk att skydda sina uppgifter.
+Förslag är också välkomna: fler hemsidor att ta bort sig från, bättre steg, eller annat som hjälper folk att skydda sina uppgifter.
 
 Live: [suddamig.se](https://suddamig.se)
