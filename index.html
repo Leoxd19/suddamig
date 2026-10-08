@@ -470,8 +470,8 @@ Kind regards
   moved:{sv:"<strong>Har du flyttat eller bytt nummer?</strong> Börja om och gå igenom listan en gång till.",en:"<strong>Moved or got a new number?</strong> Start over and go through the list again."},
   reset:{sv:"Börja om",en:"Start over"}, resetQ:{sv:"Nollställa alla bockar?",en:"Clear all checkmarks?"},
   resetYes:{sv:"Ja, börja om",en:"Yes, start over"}, cancel:{sv:"Avbryt",en:"Cancel"},
-  privacy:{sv:"<strong>Ingen inloggning, ingen spårning.</strong> Sidan frågar aldrig efter ditt namn eller personnummer och använder inga cookies eller analysverktyg. Vilka steg du bockat av, språk och tema sparas bara i din egen webbläsare. Sidan ligger på GitHub Pages, som sparar besökares IP-adresser av säkerhetsskäl.",
-           en:"<strong>No login, no tracking.</strong> This page never asks for your name or personal identity number and uses no cookies or analytics. The steps you tick, your language and your theme are saved only in your own browser. The page is hosted on GitHub Pages, which logs visitors' IP addresses for security purposes."}
+  privacy:{sv:"<strong>Ingen inloggning, ingen spårning.</strong> Sidan frågar aldrig efter ditt namn eller personnummer och använder inga cookies. Vi räknar bara det totala antalet sidvisningar: varje besök lägger till 1 i en siffra, och inget annat om dig sparas. Vilka steg du bockat av, språk och tema sparas bara i din egen webbläsare. Sidan ligger på GitHub Pages, som sparar besökares IP-adresser av säkerhetsskäl.",
+           en:"<strong>No login, no tracking.</strong> This page never asks for your name or personal identity number and uses no cookies. We only count total page views: each visit adds 1 to a single number, and nothing else about you is stored. The steps you tick, your language and your theme are saved only in your own browser. The page is hosted on GitHub Pages, which logs visitors' IP addresses for security purposes."}
 };
 
 /* ---------- state ---------- */
@@ -609,6 +609,11 @@ function resetConfirm(){
 
 applyTheme();
 render();
+
+/* ---------- view counter: adds 1 to a total, sends nothing else ---------- */
+if(location.hostname === "suddamig.se"){
+  try{ navigator.sendBeacon("https://count.suddamig.se/hit"); }catch(e){}
+}
 </script>
 
 </body>

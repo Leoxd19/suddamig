@@ -4,8 +4,9 @@ En gratis steg-för-steg-guide för att ta bort dig från Ratsit, Hitta, MrKoll,
 
 A free step-by-step guide to removing yourself from Swedish people-search sites.
 
-- Ingen inloggning, ingen spårning, inga cookies. Bara en HTML-sida.
+- Ingen inloggning, ingen spårning, inga cookies.
 - Framstegen sparas bara i din egen webbläsare.
+- Sidan räknar bara det totala antalet sidvisningar, ingenting om besökaren.
 
 ## Hittat ett fel eller saknar något?
 
