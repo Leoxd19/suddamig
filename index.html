@@ -171,6 +171,8 @@ section{display:grid;gap:14px}
 .faq{display:grid;gap:12px}
 details{background:var(--surface);border:var(--b);border-radius:var(--r);padding:16px 18px}
 details>div{max-width:60ch;color:var(--soft);line-height:1.65}
+details a{color:var(--link);font-weight:700}
+details .src{font-size:.9rem}
 summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";font-size:1.4rem;line-height:1;font-weight:400;flex:none}
@@ -290,6 +292,7 @@ details p+p{margin-top:10px}
     <div class="faq">
       <details><summary data-i18n="whyQ"></summary><div data-i18n="whyA"></div></details>
       <details><summary data-i18n="backQ"></summary><div data-i18n="backA"></div></details>
+      <details><summary data-i18n="bankidQ"></summary><div data-i18n="bankidA"></div></details>
       <details><summary data-i18n="moreQ"></summary><div data-i18n="more"></div></details>
     </div>
   </section>
@@ -418,11 +421,11 @@ const T = {
             en:"Showing up again? Email the site's GDPR address with this text and fill in the brackets."},
   tpl:{sv:`Hej,
 
-Jag begär radering av samtliga personuppgifter ni behandlar om mig, enligt artikel 17 i dataskyddsförordningen (GDPR).
+Jag begär radering av samtliga personuppgifter ni behandlar om mig, enligt artikel 17 i dataskyddsförordningen (GDPR). Jag invänder också, enligt artikel 21, mot att ni fortsätter att behandla eller publicera mina uppgifter.
 
-Jag begär också att ni inte publicerar mina uppgifter igen, och att ni bekräftar raderingen skriftligt.
+Bekräfta skriftligt att uppgifterna är raderade och att de inte kommer att publiceras igen.
 
-Jag hänvisar till EU-domstolens dom i mål C-199/24 den 9 juli 2026, enligt vilken ett utgivningsbevis inte i sig undantar en verksamhet från GDPR.
+Jag hänvisar till EU-domstolens dom den 9 juli 2026 i mål C-199/24, där domstolen fann att ett utgivningsbevis inte räcker för att undanta en verksamhet från GDPR. Domen gällde Lexbase, men samma resonemang bör gälla er verksamhet.
 
 Namn: [ditt namn]
 Adress: [din adress]
@@ -431,11 +434,11 @@ Med vänlig hälsning
 [ditt namn]`,
        en:`Hello,
 
-I request the erasure of all personal data you process about me, under Article 17 of the General Data Protection Regulation (GDPR).
+I request the erasure of all personal data you process about me, under Article 17 of the General Data Protection Regulation (GDPR). I also object, under Article 21, to any further processing or publication of my data.
 
-I also request that you do not publish my data again, and that you confirm the erasure in writing.
+Please confirm in writing that the data has been erased and will not be published again.
 
-I refer to the judgment of the Court of Justice of the EU in case C-199/24 of 9 July 2026, which holds that a publishing certificate (utgivningsbevis) does not in itself exempt an operation from the GDPR.
+I refer to the judgment of the Court of Justice of the EU of 9 July 2026 in case C-199/24, where the court found that a publishing certificate (utgivningsbevis) is not enough to exempt an operation from the GDPR. The case concerned Lexbase, but the same reasoning should apply to your operation.
 
 Name: [your name]
 Address: [your address]
@@ -456,16 +459,19 @@ Kind regards
   more:{sv:"<p>Ja, till exempel Lexbase, Biluppgifter och Krimfup. Guiden har inga kontrollerade steg för dem än, men GDPR-mallen ovan går att använda.</p>",
         en:"<p>Yes, for example Lexbase, Biluppgifter and Krimfup. This guide has no checked steps for them yet, but the GDPR template above works.</p>"},
   whyQ:{sv:"Varför måste jag göra det här själv?",en:"Why do I have to do this myself?"},
-  whyA:{sv:"<p>Hemsidorna har utgivningsbevis, som ger dem samma grundlagsskydd som en tidning. Därför har de hävdat att GDPR inte gäller det de publicerar.</p><p>Den 9 juli 2026 slog EU-domstolen (mål C&#8209;199/24) fast att ett utgivningsbevis inte i sig undantar en hemsida från GDPR. Domen gällde Lexbase. Om samma sak gäller hemsidor som visar adresser och telefonnummer är inte prövat än.</p><p>IMY granskar bland andra MrKoll och Upplysning men utreder inte enskilda klagomål under tiden. Regeringen ändrar inte grundlagen just nu, utan ska utreda om hemsidorna kan regleras i vanlig lag. Tills vidare tar du bort dig själv, hemsida för hemsida.</p><p>Dina uppgifter finns kvar hos Skatteverket och kan begäras ut av vem som helst, men Skatteverket lägger inte ut dem på nätet.</p>",
-        en:"<p>The sites hold a publishing certificate (utgivningsbevis), which gives them the same constitutional protection as a newspaper. That is why they have claimed the GDPR does not apply to what they publish.</p><p>On 9 July 2026 the Court of Justice of the EU ruled (case C&#8209;199/24) that a publishing certificate does not in itself exempt a site from the GDPR. The case concerned Lexbase. Whether the same applies to sites that show addresses and phone numbers has not been tested yet.</p><p>The Swedish data protection authority (IMY) is reviewing MrKoll and Upplysning among others, but is not investigating individual complaints in the meantime. The government is not changing the constitution for now and will instead look into regulating the sites through ordinary law. Until then, you remove yourself, site by site.</p><p>Your details remain with the Swedish Tax Agency and anyone can request them, but the agency does not publish them online.</p>"},
+  whyA:{sv:"<p>Hemsidorna har utgivningsbevis, som ger dem samma grundlagsskydd som en tidning. Därför har de hävdat att GDPR inte gäller det de publicerar.</p><p>Den 9 juli 2026 slog EU-domstolen fast (mål C&#8209;199/24) att det inte i sig räknas som journalistik att lägga ut domar på nätet mot betalning, och att ett utgivningsbevis inte räcker för att slippa GDPR. Domen gällde Lexbase. Om samma sak gäller hemsidor som visar adresser och telefonnummer är inte prövat än.</p><p>IMY granskar sedan juni 2025 om MrKoll och Upplysning raderar uppgifter när någon ber om det, och utreder inte enskilda klagomål under tiden. Regeringen går inte vidare med att ändra grundlagen just nu, utan vill utreda om hemsidorna kan regleras i vanlig lag. Tills vidare tar du bort dig själv, hemsida för hemsida.</p><p>Dina uppgifter finns kvar hos Skatteverket och kan begäras ut av vem som helst, men Skatteverket lägger inte ut dem på nätet.</p><p class='src'>Källor: <a href='https://www.imy.se/nyheter/imy-granskar-ytterligare-tva-soktjanster-med-utgivningsbevis/' target='_blank' rel='noopener'>IMY:s granskning</a>, <a href='https://www.imy.se/privatperson/dataskydd/imy-utreder-inte-klagomal-om-soktjanster-medan-samlad-granskning-pagar/' target='_blank' rel='noopener'>IMY om klagomål</a>, <a href='https://www.riksdagen.se/sv/dokument-och-lagar/dokument/betankande/offentlighet-sekretess-och-integritet_hd01ku26/html/' target='_blank' rel='noopener'>riksdagen 2025/26:KU26</a>, <a href='https://curia.europa.eu/juris/liste.jsf?num=C-199/24' target='_blank' rel='noopener'>EU-domstolen C&#8209;199/24</a>.</p>",
+        en:"<p>The sites hold a publishing certificate (utgivningsbevis), which gives them the same constitutional protection as a newspaper. That is why they have claimed the GDPR does not apply to what they publish.</p><p>On 9 July 2026 the Court of Justice of the EU ruled (case C&#8209;199/24) that putting court judgments online for payment is not in itself journalism, and that a publishing certificate is not enough to escape the GDPR. The case concerned Lexbase. Whether the same applies to sites that show addresses and phone numbers has not been tested yet.</p><p>Since June 2025, the Swedish data protection authority (IMY) has been reviewing whether MrKoll and Upplysning delete data when people ask, and is not investigating individual complaints in the meantime. The government is not moving ahead with changing the constitution for now and wants to look into regulating the sites through ordinary law instead. Until then, you remove yourself, site by site.</p><p>Your details remain with the Swedish Tax Agency and anyone can request them, but the agency does not publish them online.</p><p class='src'>Sources: <a href='https://www.imy.se/nyheter/imy-granskar-ytterligare-tva-soktjanster-med-utgivningsbevis/' target='_blank' rel='noopener'>IMY's review</a>, <a href='https://www.imy.se/privatperson/dataskydd/imy-utreder-inte-klagomal-om-soktjanster-medan-samlad-granskning-pagar/' target='_blank' rel='noopener'>IMY on complaints</a>, <a href='https://www.riksdagen.se/sv/dokument-och-lagar/dokument/betankande/offentlighet-sekretess-och-integritet_hd01ku26/html/' target='_blank' rel='noopener'>Riksdag report 2025/26:KU26</a>, <a href='https://curia.europa.eu/juris/liste.jsf?num=C-199/24' target='_blank' rel='noopener'>CJEU case C&#8209;199/24</a>.</p>"},
+  bankidQ:{sv:"Är det säkert att legitimera sig med BankID hos dem?",en:"Is it safe to identify with BankID on their sites?"},
+  bankidA:{sv:"<p>Ja. Med BankID får hemsidan ditt namn och personnummer, som de redan har. Det är så de kontrollerar att det är du som ber om borttagningen och inte någon annan.</p><p>Starta alltid BankID från hemsidan själv, aldrig via en länk i ett mejl eller sms.</p>",
+           en:"<p>Yes. With BankID the site receives your name and personal identity number, which it already has. That is how it checks that the request comes from you and not someone else.</p><p>Always start BankID from the site yourself, never from a link in an email or text message.</p>"},
   backQ:{sv:"Kan jag dyka upp igen?",en:"Can I show up again?"},
-  backA:{sv:"<p>Ja, det kan hända. Hemsidorna säger själva att borttagningen håller: Ratsit och Merinfo anger ingen tidsgräns, MrKoll säger att den gäller för gott och Eniros Dölj mig går inte att ångra.</p><p>Det som brukar få folk att dyka upp igen är nya uppgifter. Hemsidorna köper regelbundet nya utdrag från bland annat SPAR och teleoperatörerna, och en ny adress eller ett nytt nummer kan ge en ny post. Därför: hemligt nummer, en ny koll efter flytten och sparade bekräftelser.</p>",
-        en:"<p>Yes, it can happen. The sites themselves say the removal lasts: Ratsit and Merinfo state no time limit, MrKoll says it is permanent and Eniro's Hide me cannot be undone.</p><p>What usually brings people back is new data. The sites regularly buy fresh extracts from sources such as SPAR and the phone operators, and a new address or number can create a new record. So: an unlisted number, a new check after moving, and saved confirmations.</p>"},
+  backA:{sv:"<p>Ja, det kan hända. Hemsidorna säger själva att borttagningen håller: Ratsit och Merinfo anger ingen tidsgräns, MrKoll säger att den gäller för gott och Eniros Dölj mig går inte att ångra.</p><p>Det som brukar få folk att dyka upp igen är nya uppgifter. Hemsidorna hämtar regelbundet nya uppgifter från offentliga register och från teleoperatörerna, och en ny adress eller ett nytt nummer kan ge en ny post. Därför: hemligt nummer, en ny koll efter flytten och sparade bekräftelser.</p>",
+        en:"<p>Yes, it can happen. The sites themselves say the removal lasts: Ratsit and Merinfo state no time limit, MrKoll says it is permanent and Eniro's Hide me cannot be undone.</p><p>What usually brings people back is new data. The sites regularly pull fresh data from public records and from the phone operators, and a new address or number can create a new record. So: an unlisted number, a new check after moving, and saved confirmations.</p>"},
   moved:{sv:"<strong>Har du flyttat eller bytt nummer?</strong> Börja om och gå igenom listan en gång till.",en:"<strong>Moved or got a new number?</strong> Start over and go through the list again."},
   reset:{sv:"Börja om",en:"Start over"}, resetQ:{sv:"Nollställa alla bockar?",en:"Clear all checkmarks?"},
   resetYes:{sv:"Ja, börja om",en:"Yes, start over"}, cancel:{sv:"Avbryt",en:"Cancel"},
-  privacy:{sv:"<strong>Ingen inloggning, inga personuppgifter.</strong> Sidan frågar aldrig efter ditt namn eller personnummer. Det enda som sparas är vilka steg du bockat av, språk och tema, och det sparas bara i din egen webbläsare.",
-           en:"<strong>No login, no personal data.</strong> This page never asks for your name or personal identity number. The only things saved are which steps you ticked, your language and theme, and only in your own browser."}
+  privacy:{sv:"<strong>Ingen inloggning, ingen spårning.</strong> Sidan frågar aldrig efter ditt namn eller personnummer och använder inga cookies eller analysverktyg. Vilka steg du bockat av, språk och tema sparas bara i din egen webbläsare. Sidan ligger på GitHub Pages, som sparar besökares IP-adresser av säkerhetsskäl.",
+           en:"<strong>No login, no tracking.</strong> This page never asks for your name or personal identity number and uses no cookies or analytics. The steps you tick, your language and your theme are saved only in your own browser. The page is hosted on GitHub Pages, which logs visitors' IP addresses for security purposes."}
 };
 
 /* ---------- state ---------- */
