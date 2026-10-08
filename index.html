@@ -116,7 +116,7 @@ section{display:grid;gap:14px}
 /* cards */
 .list{display:grid;gap:14px;list-style:none;margin:0;padding:0}
 .card{background:var(--surface);border:var(--b);border-radius:var(--r);padding:18px;display:grid;gap:14px;min-width:0}
-.head{display:flex;align-items:center;gap:14px}
+.head{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap}
 .num{flex:none;width:40px;height:40px;border:var(--b);border-radius:var(--r);display:grid;place-items:center;font-weight:700;font-variant-numeric:tabular-nums}
 .head h3{font-size:1.5rem;font-weight:700;flex:1;min-width:0}
 .pill{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:var(--b);border-radius:99px;padding:4px 11px 4px 9px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
@@ -261,6 +261,11 @@ details p+p{margin-top:10px}
   </section>
 
   <section>
+    <h2><span data-i18n="secMore"></span><small data-i18n="ifApply"></small></h2>
+    <ol class="list" id="more"></ol>
+  </section>
+
+  <section>
     <h2 data-i18n="secAfter"></h2>
     <ol class="list" id="after"></ol>
   </section>
@@ -293,6 +298,7 @@ details p+p{margin-top:10px}
       <details><summary data-i18n="whyQ"></summary><div data-i18n="whyA"></div></details>
       <details><summary data-i18n="backQ"></summary><div data-i18n="backA"></div></details>
       <details><summary data-i18n="bankidQ"></summary><div data-i18n="bankidA"></div></details>
+      <details><summary data-i18n="payQ"></summary><div data-i18n="payA"></div></details>
       <details><summary data-i18n="moreQ"></summary><div data-i18n="more"></div></details>
     </div>
   </section>
@@ -314,8 +320,8 @@ const SITES = [
             en:["Open the direct link. The page is not in the site menu.","Tick the box under <b>Villkor</b> (Terms).","Press <b>Ta bort dig från Ratsit</b> and identify with BankID."]}},
    nobankid:{link:["https://www.ratsit.se/kontakt","ratsit.se/kontakt"], email:"gdpr@ratsit.se",
      steps:{sv:["Använd kontaktformuläret eller mejla och be att bli borttagen."],en:["Use the contact form or email them and ask to be removed."]}},
-   note:{sv:"Dyker du upp igen, till exempel efter ett årsskifte? Ta en skärmdump och skicka en skriftlig GDPR-begäran till <b>gdpr@ratsit.se</b>, inte till kundtjänst. Mallen finns längre ner.",
-         en:"Showing up again, for example after New Year? Take a screenshot and send a written GDPR request to <b>gdpr@ratsit.se</b>, not to customer service. The template is further down."}},
+   note:{sv:"Syns du fortfarande, till exempel efter ett årsskifte eller för inloggade? Ta en skärmdump och skicka en skriftlig GDPR-begäran till <b>gdpr@ratsit.se</b>, inte till kundtjänst. Mallen finns längre ner.",
+         en:"Still visible, for example after New Year or to logged-in users? Take a screenshot and send a written GDPR request to <b>gdpr@ratsit.se</b>, not to customer service. The template is further down."}},
   {id:"mrkoll", name:"MrKoll", tag:{sv:"Direkt",en:"Instant"}, icon:"bolt", tagNo:{sv:"Via mejl",en:"By email"}, iconNo:"mail",
    bankid:{link:["https://mrkoll.se/om/ta-bort/","mrkoll.se/om/ta-bort"],
      steps:{sv:["Scrolla längst ner på sidan.","Tryck på rutan <b>Starta BankID och ta bort mig</b>.","Legitimera dig med BankID. Du tas bort direkt."],
@@ -323,14 +329,14 @@ const SITES = [
    nobankid:{email:"hej@nusvar.se",
      steps:{sv:["Mejla och be att bli borttagen.","De vill kontrollera vem du är, så fråga hur det går till utan BankID."],
             en:["Email them and ask to be removed.","They want to verify who you are, so ask how to do that without BankID."]}},
-   warn:{sv:"Knappen ser ut som en sökruta. Det är den du ska trycka på.",en:"The button looks like a search field. That is the one to press."}},
+   warn:{sv:"Använd sidan <b>Ta bort dig från Mrkoll</b> via länken. Den gamla sidan döljer bara adressen tillfälligt. Knappen ser ut som en sökruta, men det är den du ska trycka på.",en:"Use the page <b>Ta bort dig från Mrkoll</b> via the link. The old page only hides your address temporarily. The button looks like a search field, but that is the one to press."}},
   {id:"hitta", name:"Hitta", tag:{sv:"BankID",en:"BankID"}, icon:"id", tagNo:{sv:"Via chatt",en:"By chat"}, iconNo:"chat",
    bankid:{link:["https://www.hitta.se/kontakta-oss/ta-bort-kontaktsida","hitta.se/…/ta-bort-kontaktsida"],
      steps:{sv:["Sök fram dig själv.","Tryck på <b>Ta bort</b>.","Logga in med BankID."],en:["Search for yourself.","Press <b>Ta bort</b> (Remove).","Log in with BankID."]}},
    nobankid:{link:["https://support.hitta.se","support.hitta.se"],
      steps:{sv:["Öppna chatten på supportsidan och be att bli borttagen."],en:["Open the chat on the support page and ask to be removed."]}},
-   note:{sv:"Hitta får telefonnummer från operatörerna och kan publicera dig igen om du inte har hemligt nummer. Se steg 9.",
-         en:"Hitta gets phone numbers from the operators and can list you again unless your number is unlisted. See step 9."}},
+   note:{sv:"Hitta får telefonnummer från operatörerna och kan publicera dig igen om du inte har hemligt nummer. Se Hemligt nummer längre ner.",
+         en:"Hitta gets phone numbers from the operators and can list you again unless your number is unlisted. See Unlisted number further down."}},
   {id:"merinfo", name:"Merinfo", tag:{sv:"BankID",en:"BankID"}, icon:"id", tagNo:{sv:"Blankett",en:"Form"}, iconNo:"doc",
    bankid:{link:["https://www.merinfo.se/ta-bort-mina-uppgifter","merinfo.se/ta-bort-mina-uppgifter"],
      steps:{sv:["Kryssa i rutan och tryck på <b>Gå vidare</b>.","Legitimera dig med BankID.","Välj <b>Radera min profil helt</b>."],
@@ -343,8 +349,9 @@ const SITES = [
      steps:{sv:["Sök fram dig själv.","Logga in med BankID.","Tryck på <b>Dölj mig</b> och sedan <b>Ja, dölj</b>."],en:["Search for yourself.","Log in with BankID.","Press <b>Dölj mig</b> (Hide me), then <b>Ja, dölj</b> (Yes, hide)."]}},
    nobankid:{email:"privatpersoner@eniro.com",
      steps:{sv:["Mejla och be att bli dold."],en:["Email them and ask to be hidden."]}},
-   note:{sv:"Eniro får också nummer från operatörerna. Hemligt nummer i steg 9 gör att du inte dyker upp igen den vägen.",
-         en:"Eniro also gets numbers from the operators. An unlisted number (step 9) keeps you from reappearing that way."}},
+   warn:{sv:"Välj <b>Dölj mig</b>, inte <b>Ta bort adress</b>.",en:"Choose <b>Dölj mig</b> (Hide me), not <b>Ta bort adress</b> (Remove address)."},
+   note:{sv:"Eniro får också nummer från operatörerna. Med hemligt nummer dyker du inte upp igen den vägen.",
+         en:"Eniro also gets numbers from the operators. An unlisted number keeps you from reappearing that way."}},
   {id:"birthday", name:"Birthday", tag:{sv:"Via mejl",en:"By email"}, icon:"mail",
    bankid:{email:"info@birthday.se",
      steps:{sv:["Mejla och be att bli borttagen.","Du får en länk till <b>Mina Uppgifter</b>. Logga in där med BankID och ta bort dig."],
@@ -357,6 +364,27 @@ const SITES = [
      steps:{sv:["Upplysning har pausat sin sökning, men skriver att de vill komma tillbaka.","Skicka en GDPR-begäran via kontaktformuläret, så att dina uppgifter är raderade innan hemsidan öppnar igen. Använd mallen längre ner."],
             en:["Upplysning has paused its search, but says it wants to come back.","Send a GDPR erasure request through the contact form, so your details are deleted before the site reopens. Use the template further down."]}},
    note:{sv:"Spara bekräftelsen. Upplysning är en av hemsidorna IMY granskar.",en:"Save the confirmation. Upplysning is one of the sites IMY is reviewing."}}
+];
+const MORE = [
+  {id:"truecaller", name:"Truecaller", tag:{sv:"Ditt nummer",en:"Your number"}, icon:"phone",
+   all:{link:["https://www.truecaller.com/unlisting","truecaller.com/unlisting"],
+     steps:{sv:["Truecaller visar ditt namn för den du ringer, även om du aldrig har haft appen. Uppgifterna kommer från andras adressböcker.","Skriv in ditt nummer med landskod (+46…), klara robotkontrollen och tryck på <b>Unlist</b>.","Bekräfta. Numret tas bort inom ett dygn."],
+            en:["Truecaller shows your name to people you call, even if you have never used the app. The data comes from other people's address books.","Enter your number with country code (+46…), pass the robot check and press <b>Unlist</b>.","Confirm. Your number is removed within a day."]}},
+   warn:{sv:"Använder du själv Truecaller-appen? Avaktivera först ditt konto i appens inställningar, annars går numret inte att ta bort.",en:"Do you use the Truecaller app yourself? Deactivate your account in the app's settings first, otherwise the number cannot be removed."}},
+  {id:"biluppgifter", name:"Biluppgifter", tag:{sv:"Om du har bil",en:"If you own a car"}, icon:"car",
+   all:{email:"info@biluppgifter.se",
+     steps:{sv:["Gäller dig om du äger ett fordon. Annars kan du bocka av direkt.","Mejla och be att dina uppgifter tas bort. Använd GDPR-mallen längre ner.","Enligt deras integritetspolicy vill de ha begäran skriftligt och undertecknad, per post till Biluppgifter Sverige AB, Olofdalsvägen 40A, 302 41 Halmstad."],
+            en:["Applies if you own a vehicle. Otherwise you can tick it off right away.","Email them and ask for your data to be removed. Use the GDPR template further down.","According to their privacy policy, they want the request in writing and signed, by post to Biluppgifter Sverige AB, Olofdalsvägen 40A, 302 41 Halmstad, Sweden."]}},
+   note:{sv:"De kan svara att deras databas skyddas av grundlagen. Spara svaret.",en:"They may reply that their database is protected by the constitution. Save the reply."}},
+  {id:"lexbase", name:"Lexbase", tag:{sv:"Bara vid dom",en:"Only if convicted"}, icon:"scale",
+   all:{email:"info@lexbase.se",
+     steps:{sv:["Gäller bara om du har dömts för ett brott. Annars kan du bocka av direkt.","Mejla en GDPR-begäran med mallen längre ner. EU-domen C&#8209;199/24 gällde just Lexbase, så hänvisa till den.","Spara svaret, oavsett vad de svarar."],
+            en:["Only applies if you have been convicted of a crime. Otherwise you can tick it off right away.","Email a GDPR request using the template further down. The EU ruling C&#8209;199/24 concerned Lexbase itself, so refer to it.","Save the reply, whatever it says."]}},
+   note:{sv:"Räkna med motstånd. Lexbase skriver fortfarande att publiceringen skyddas av grundlagen, och domen ger ingen automatisk rätt till radering.",en:"Expect pushback. Lexbase still states that its publishing is protected by the constitution, and the ruling gives no automatic right to erasure."}},
+  {id:"mantal", name:"Mantal", tag:{sv:"Inte igång än",en:"Not live yet"}, icon:"hourglass",
+   all:{link:["https://mantal.se/ta-bort","mantal.se/ta-bort"],
+     steps:{sv:["Mantal är en ny hemsida med utgivningsbevis. Just nu visar den bara påhittade testuppgifter, inga riktiga personer.","Vill du förebygga kan du redan nu begära borttagning i deras formulär. Skriv ditt namn och din adress under <b>Vilken uppgift vill du ta bort?</b>"],
+            en:["Mantal is a new site with a publishing certificate. Right now it only shows made-up test data, no real people.","To get ahead of it, you can already request removal in their form. Enter your name and address under <b>Vilken uppgift vill du ta bort?</b> (Which information do you want removed?)"]}}}
 ];
 const AFTER = [
   {id:"google", name:"Google", tag:{sv:"Google-konto",en:"Google account"}, icon:"user",
@@ -371,7 +399,7 @@ const AFTER = [
      ops:{sv:[["Telia","Du listas om du inte väljer bort det. Mitt Telia › Inställningar › Samtalsinställningar."],["Tele2","Mitt Tele2 › välj hemligt endast hos nummerupplysningen."],["Tre, Telenor","Listar bara med samtycke. Ta tillbaka samtycket om du gett det."],["Andra","Kolla Mina sidor eller fråga kundtjänst."]],
           en:[["Telia","You are listed unless you opt out. Mitt Telia › Inställningar › Samtalsinställningar."],["Tele2","Mitt Tele2 › choose unlisted with directory services only."],["Tre, Telenor","Only list you with consent. Withdraw it if you gave it."],["Others","Check your account pages or ask customer service."]]}}
 ];
-const TOTAL = SITES.length + AFTER.length;
+const TOTAL = SITES.length + MORE.length + AFTER.length;
 const ICONS = {
   clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   bolt:'<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>',
@@ -381,6 +409,10 @@ const ICONS = {
   doc:'<path d="M6 3h9l4 4v14H6zM15 3v4h4M9 12h6M9 16h6"/>',
   user:'<circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 14.5-4.5 16 0"/>',
   pause:'<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  car:'<path d="M5 17h14M5 17a2 2 0 1 1-4 0 2 2 0 0 1 4 0M23 17a2 2 0 1 1-4 0 2 2 0 0 1 4 0M3 17v-5l2-5h14l2 5v5M3 12h18"/>',
+  scale:'<path d="M12 4v16M7 20h10M5 8h14M5 8l-3 6a3 3 0 0 0 6 0zM19 8l-3 6a3 3 0 0 0 6 0z"/>',
+  hourglass:'<path d="M6 3h12M6 21h12M7 3c0 5 10 5 10 9s-10 4-10 9M17 3c0 5-10 5-10 9s10 4 10 9"/>',
   star:'<path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/>'
 };
 const icon = k => k ? `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>` : "";
@@ -402,7 +434,7 @@ const T = {
   report:{sv:"<strong>Hittat ett fel eller saknar något?</strong> Hemsidorna ändrar sina steg ibland, och tips om fler hemsidor eller annat som hjälper är välkomna. <a href='https://github.com/Leoxd19/suddamig/issues' target='_blank' rel='noopener'>Skriv på GitHub</a>.",en:"<strong>Found a mistake or missing something?</strong> The sites change their steps now and then, and tips about more sites or anything else that helps are welcome. <a href='https://github.com/Leoxd19/suddamig/issues' target='_blank' rel='noopener'>Write on GitHub</a>."},
   tplTitle:{sv:"Mall: GDPR-begäran",en:"Template: GDPR request"},
   count:{sv:(n)=>`${n} av ${TOTAL} klara`,en:(n)=>`${n} of ${TOTAL} done`}, allDone:{sv:"Alla klara",en:"All done"},
-  secSites:{sv:"Hemsidorna",en:"The sites"}, secAfter:{sv:"Sedan",en:"Then"},
+  secSites:{sv:"Hemsidorna",en:"The sites"}, secMore:{sv:"Fler hemsidor",en:"More sites"}, ifApply:{sv:"Om de gäller dig",en:"If they apply to you"}, secAfter:{sv:"Sedan",en:"Then"},
   secStay:{sv:"Så håller du dig borta",en:"Staying removed"},
   secMail:{sv:"Mindre reklam i brevlådan",en:"Less junk mail"}, optional:{sv:"Valfritt",en:"Optional"},
   secFaq:{sv:"Frågor",en:"Questions"}, moreQ:{sv:"Finns det fler hemsidor?",en:"Are there more sites?"},
@@ -412,11 +444,13 @@ const T = {
   stay:{sv:[
       "<b>Spara bekräftelserna.</b> Mejl och skärmdumpar är bra att ha om du dyker upp igen.",
       "<b>Kolla igen efter en flytt eller ett nytt nummer.</b> Hemsidorna köper nya uppgifter regelbundet, och en ändring kan göra att du räknas som en ny person.",
-      "<b>Sök på dig själv om ett halvår.</b> Det tar två minuter och fångar det mesta."],
+      "<b>Sök på dig själv om ett halvår.</b> Det tar två minuter och fångar det mesta.",
+      "<b>Kolla i ett privat fönster.</b> Webbläsaren kan visa en gammal sida, så det kan se ut som att du finns kvar fast du är borttagen."],
     en:[
       "<b>Save the confirmations.</b> Emails and screenshots are useful if you show up again.",
       "<b>Check again after moving or getting a new number.</b> The sites buy fresh data regularly, and a change can make you count as a new person.",
-      "<b>Search for yourself in six months.</b> It takes two minutes and catches most things."]},
+      "<b>Search for yourself in six months.</b> It takes two minutes and catches most things.",
+      "<b>Check in a private window.</b> Your browser may show an old copy, so it can look like you are still listed when you are not."]},
   tplIntro:{sv:"Dyker du upp igen? Mejla hemsidans GDPR-adress med den här texten och fyll i hakparenteserna.",
             en:"Showing up again? Email the site's GDPR address with this text and fill in the brackets."},
   tpl:{sv:`Hej,
@@ -456,8 +490,11 @@ Kind regards
       "<b>Advertising block in SPAR.</b> Stops the state address register from handing out your address for advertising.",
       "<b>\"Nej tack till reklam\" sticker.</b> Put it on your mailbox to stop leaflets without your name.",
       "<b>Companies you are a customer of.</b> Tell them directly to stop sending ads."]},
-  more:{sv:"<p>Ja, till exempel Lexbase, Biluppgifter och Krimfup. Guiden har inga kontrollerade steg för dem än, men GDPR-mallen ovan går att använda.</p>",
-        en:"<p>Yes, for example Lexbase, Biluppgifter and Krimfup. This guide has no checked steps for them yet, but the GDPR template above works.</p>"},
+  payQ:{sv:"Ska jag betala någon för att ta bort mig?",en:"Should I pay someone to remove me?"},
+  payA:{sv:"<p>Nej. Allt på den här sidan är gratis, och betaltjänsterna gör samma sak som du gör här själv.</p><p>Enligt <a href='https://www.tv4.se/artikel/1e1Yl02xcBOR9SwCoft563/tar-betalt-foer-att-radera-domar-som-de-sjaelva-har-publicerat' target='_blank' rel='noopener'>TV4</a> drivs till exempel RaderaNamn, som tar runt 500 kr för att ta bort uppgifter, av samma person som Krimfup, som publicerar dem.</p>",
+        en:"<p>No. Everything on this page is free, and the paid services do the same thing you do here yourself.</p><p>According to <a href='https://www.tv4.se/artikel/1e1Yl02xcBOR9SwCoft563/tar-betalt-foer-att-radera-domar-som-de-sjaelva-har-publicerat' target='_blank' rel='noopener'>TV4</a>, RaderaNamn, which charges around 500 SEK to remove data, is run by the same person as Krimfup, which publishes it.</p>"},
+  more:{sv:"<p>Ja, till exempel Krimfup, Car.info och Allabolag. Guiden har inga kontrollerade steg för dem än, men GDPR-mallen ovan går att använda.</p>",
+        en:"<p>Yes, for example Krimfup, Car.info and Allabolag. This guide has no checked steps for them yet, but the GDPR template above works.</p>"},
   whyQ:{sv:"Varför måste jag göra det här själv?",en:"Why do I have to do this myself?"},
   whyA:{sv:"<p>Hemsidorna har utgivningsbevis, som ger dem samma grundlagsskydd som en tidning. Därför har de hävdat att GDPR inte gäller det de publicerar.</p><p>Den 9 juli 2026 slog EU-domstolen fast (mål C&#8209;199/24) att det inte i sig räknas som journalistik att lägga ut domar på nätet mot betalning, och att ett utgivningsbevis inte räcker för att slippa GDPR. Domen gällde Lexbase. Om samma sak gäller hemsidor som visar adresser och telefonnummer är inte prövat än.</p><p>IMY granskar sedan juni 2025 om MrKoll och Upplysning raderar uppgifter när någon ber om det, och utreder inte enskilda klagomål under tiden. Regeringen går inte vidare med att ändra grundlagen just nu, utan vill utreda om hemsidorna kan regleras i vanlig lag. Tills vidare tar du bort dig själv, hemsida för hemsida.</p><p>Dina uppgifter finns kvar hos Skatteverket och kan begäras ut av vem som helst, men Skatteverket lägger inte ut dem på nätet.</p><p class='src'>Källor: <a href='https://www.imy.se/nyheter/imy-granskar-ytterligare-tva-soktjanster-med-utgivningsbevis/' target='_blank' rel='noopener'>IMY:s granskning</a>, <a href='https://www.imy.se/privatperson/dataskydd/imy-utreder-inte-klagomal-om-soktjanster-medan-samlad-granskning-pagar/' target='_blank' rel='noopener'>IMY om klagomål</a>, <a href='https://www.riksdagen.se/sv/dokument-och-lagar/dokument/betankande/offentlighet-sekretess-och-integritet_hd01ku26/html/' target='_blank' rel='noopener'>riksdagen 2025/26:KU26</a>, <a href='https://curia.europa.eu/juris/liste.jsf?num=C-199/24' target='_blank' rel='noopener'>EU-domstolen C&#8209;199/24</a>.</p>",
         en:"<p>The sites hold a publishing certificate (utgivningsbevis), which gives them the same constitutional protection as a newspaper. That is why they have claimed the GDPR does not apply to what they publish.</p><p>On 9 July 2026 the Court of Justice of the EU ruled (case C&#8209;199/24) that putting court judgments online for payment is not in itself journalism, and that a publishing certificate is not enough to escape the GDPR. The case concerned Lexbase. Whether the same applies to sites that show addresses and phone numbers has not been tested yet.</p><p>Since June 2025, the Swedish data protection authority (IMY) has been reviewing whether MrKoll and Upplysning delete data when people ask, and is not investigating individual complaints in the meantime. The government is not moving ahead with changing the constitution for now and wants to look into regulating the sites through ordinary law instead. Until then, you remove yourself, site by site.</p><p>Your details remain with the Swedish Tax Agency and anyone can request them, but the agency does not publish them online.</p><p class='src'>Sources: <a href='https://www.imy.se/nyheter/imy-granskar-ytterligare-tva-soktjanster-med-utgivningsbevis/' target='_blank' rel='noopener'>IMY's review</a>, <a href='https://www.imy.se/privatperson/dataskydd/imy-utreder-inte-klagomal-om-soktjanster-medan-samlad-granskning-pagar/' target='_blank' rel='noopener'>IMY on complaints</a>, <a href='https://www.riksdagen.se/sv/dokument-och-lagar/dokument/betankande/offentlighet-sekretess-och-integritet_hd01ku26/html/' target='_blank' rel='noopener'>Riksdag report 2025/26:KU26</a>, <a href='https://curia.europa.eu/juris/liste.jsf?num=C-199/24' target='_blank' rel='noopener'>CJEU case C&#8209;199/24</a>.</p>"},
@@ -517,11 +554,12 @@ function render(){
   document.documentElement.lang = state.lang;
   document.querySelectorAll("[data-i18n]").forEach(el => { el.innerHTML = L(T[el.dataset.i18n]); });
   document.getElementById("sites").replaceChildren(...SITES.map((x,i)=>card(x,i+1)));
-  document.getElementById("after").replaceChildren(...AFTER.map((x,i)=>card(x,SITES.length+i+1)));
+  document.getElementById("more").replaceChildren(...MORE.map((x,i)=>card(x,SITES.length+i+1)));
+  document.getElementById("after").replaceChildren(...AFTER.map((x,i)=>card(x,SITES.length+MORE.length+i+1)));
   document.getElementById("stay").innerHTML = L(T.stay).map(s=>`<li><span>${s}</span></li>`).join("");
   document.getElementById("mail").innerHTML = L(T.mail).map(s=>`<li><span>${s}</span></li>`).join("");
   document.getElementById("tpl").textContent = L(T.tpl);
-  const n = [...SITES,...AFTER].filter(x=>state.done[x.id]).length;
+  const n = [...SITES,...MORE,...AFTER].filter(x=>state.done[x.id]).length;
   document.getElementById("count").textContent = n === TOTAL ? L(T.allDone) : L(T.count)(n);
   document.getElementById("bar").style.width = (n/TOTAL*100) + "%";
   document.getElementById("finished").hidden = n !== TOTAL;
