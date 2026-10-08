@@ -1,6 +1,6 @@
 # Sudda mig
 
-En gratis steg-för-steg-guide för att ta bort dig från Ratsit, Hitta, MrKoll, Merinfo, Eniro och Birthday.
+En gratis steg-för-steg-guide för att ta bort dig från Ratsit, Hitta, MrKoll, Merinfo, Eniro, Birthday med flera.
 
 A free step-by-step guide to removing yourself from Swedish people-search sites.
 

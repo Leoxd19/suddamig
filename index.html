@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sudda mig</title>
-<meta name="description" content="Ta bort dig från Ratsit, Hitta, MrKoll, Merinfo, Eniro och Birthday. Gratis, steg för steg, utan inloggning.">
+<meta name="description" content="Ta bort dig från Ratsit, Hitta, MrKoll, Merinfo, Eniro, Birthday med flera. Gratis, steg för steg, utan inloggning.">
 <meta property="og:title" content="Sudda mig">
-<meta property="og:description" content="Ta bort dig från Ratsit, Hitta, MrKoll, Merinfo, Eniro och Birthday. Gratis, steg för steg, utan inloggning.">
+<meta property="og:description" content="Ta bort dig från Ratsit, Hitta, MrKoll, Merinfo, Eniro, Birthday med flera. Gratis, steg för steg, utan inloggning.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://suddamig.se/social.png">
 <meta property="og:url" content="https://suddamig.se/">
@@ -86,7 +86,7 @@ section{display:grid;gap:14px}
 .jump{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
 .jump:hover{color:var(--ink);text-decoration-thickness:3px}
 .jump:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:3px}
-.card{scroll-margin-top:84px}
+.card,#more{scroll-margin-top:84px}
 .card.flash{animation:flash 1.4s ease-out 1}
 @keyframes flash{0%,30%{box-shadow:0 0 0 4px var(--accent)}100%{box-shadow:0 0 0 4px transparent}}
 .hero .sudd{width:clamp(72px,19vw,140px);height:auto;transform-origin:30% 90%;margin-bottom:4px}
@@ -421,8 +421,8 @@ const T = {
   light:{sv:"Ljust",en:"Light"}, dark:{sv:"Mörkt",en:"Dark"},
   stamp:{sv:"Stegen kontrollerade vecka 41, 2026",en:"Steps checked week 41, 2026"},
   h1:{sv:"Ta bort dig från hemsidorna som visar var du bor.",en:"Remove yourself from Swedish people-search sites."},
-  lead:{sv:"<a class='jump' href='#ratsit'>Ratsit</a>, <a class='jump' href='#hitta'>Hitta</a>, <a class='jump' href='#mrkoll'>MrKoll</a>, <a class='jump' href='#merinfo'>Merinfo</a>, <a class='jump' href='#eniro'>Eniro</a> och <a class='jump' href='#birthday'>Birthday</a> lägger ut din adress och ditt nummer för vem som helst. <strong>Det är gratis att ta bort sig och tar ungefär 20 minuter med BankID.</strong> Gå igenom listan uppifrån och ner.",
-        en:"<a class='jump' href='#ratsit'>Ratsit</a>, <a class='jump' href='#hitta'>Hitta</a>, <a class='jump' href='#mrkoll'>MrKoll</a>, <a class='jump' href='#merinfo'>Merinfo</a>, <a class='jump' href='#eniro'>Eniro</a> and <a class='jump' href='#birthday'>Birthday</a> show your address and phone number to anyone. <strong>Removing yourself is free and takes about 20 minutes with BankID.</strong> Work through the list from top to bottom."},
+  lead:{sv:"<a class='jump' href='#ratsit'>Ratsit</a>, <a class='jump' href='#hitta'>Hitta</a>, <a class='jump' href='#mrkoll'>MrKoll</a>, <a class='jump' href='#merinfo'>Merinfo</a>, <a class='jump' href='#eniro'>Eniro</a>, <a class='jump' href='#birthday'>Birthday</a> och <a class='jump' href='#more'>flera andra</a> lägger ut din adress och ditt nummer för vem som helst. <strong>Det är gratis att ta bort sig, och de stora tar ungefär 20 minuter med BankID.</strong> Gå igenom listan uppifrån och ner.",
+        en:"<a class='jump' href='#ratsit'>Ratsit</a>, <a class='jump' href='#hitta'>Hitta</a>, <a class='jump' href='#mrkoll'>MrKoll</a>, <a class='jump' href='#merinfo'>Merinfo</a>, <a class='jump' href='#eniro'>Eniro</a>, <a class='jump' href='#birthday'>Birthday</a> and <a class='jump' href='#more'>several others</a> put your address and phone number out for anyone to see. <strong>Removing yourself is free, and the big ones take about 20 minutes with BankID.</strong> Work through the list from top to bottom."},
   introTitle:{sv:"Varför det här spelar roll",en:"Why this matters"},
   intro:{sv:"<p class='first'>Vem som kan se var du bor borde vara ditt beslut.</p><p>I dag räcker ett namn. På några sekunder, utan kostnad, kan vem som helst se var du bor, vilket nummer du har och vem du delar hem med.</p><p>Det angår oss alla. Den som har lämnat en partner. Den som har hotats för sitt arbete. Den som helt enkelt vill få vara i fred.</p><p>Att något är offentligt betyder inte att det ska ligga framme för vem som helst.</p><p>Den här sidan hjälper dig att ta tillbaka kontrollen, en hemsida i taget.</p>",
          en:"<p class='first'>Who can see where you live should be your decision.</p><p>Today a name is enough. In seconds, for free, anyone can see where you live, what number you have and who you share a home with.</p><p>That concerns all of us. The person who has left a partner. The person who has been threatened for their work. The person who simply wants to be left alone.</p><p>Something being public should not mean it is laid out for anyone to pick up.</p><p>This page helps you take back control, one site at a time.</p>"},
