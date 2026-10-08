@@ -83,6 +83,12 @@ section{display:grid;gap:14px}
 @media (min-width:640px){.hero-head{grid-template-areas:"stamp sudd" "title sudd";row-gap:14px}.hero-head .stamp{align-self:end}.hero-head .sudd{align-self:end}}
 .lead{font-size:1.15rem;line-height:1.6;color:var(--soft);max-width:56ch}
 .lead strong{color:var(--ink)}
+.jump{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+.jump:hover{color:var(--ink);text-decoration-thickness:3px}
+.jump:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:3px}
+.card{scroll-margin-top:84px}
+.card.flash{animation:flash 1.4s ease-out 1}
+@keyframes flash{0%,30%{box-shadow:0 0 0 4px var(--accent)}100%{box-shadow:0 0 0 4px transparent}}
 .hero .sudd{width:clamp(72px,19vw,140px);height:auto;transform-origin:30% 90%;margin-bottom:4px}
 .hero .sudd.rub{animation:rub 1.1s ease-in-out .4s 1}
 @keyframes rub{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px) rotate(-3deg)}45%{transform:translateX(9px) rotate(2deg)}70%{transform:translateX(-6px) rotate(-2deg)}}
@@ -380,8 +386,8 @@ const T = {
   light:{sv:"Ljust",en:"Light"}, dark:{sv:"Mörkt",en:"Dark"},
   stamp:{sv:"Stegen kontrollerade vecka 41, 2026",en:"Steps checked week 41, 2026"},
   h1:{sv:"Ta bort dig från upplysnings&shy;sajterna.",en:"Remove yourself from Swedish people-search sites."},
-  lead:{sv:"Ratsit, Hitta, MrKoll, Merinfo, Eniro och Birthday visar din adress och ditt nummer för vem som helst. <strong>Det är gratis att ta bort sig och tar ungefär 20 minuter med BankID.</strong> Gå igenom listan uppifrån och ner.",
-        en:"Ratsit, Hitta, MrKoll, Merinfo, Eniro and Birthday show your address and phone number to anyone. <strong>Removing yourself is free and takes about 20 minutes with BankID.</strong> Work through the list from top to bottom."},
+  lead:{sv:"<a class='jump' href='#ratsit'>Ratsit</a>, <a class='jump' href='#hitta'>Hitta</a>, <a class='jump' href='#mrkoll'>MrKoll</a>, <a class='jump' href='#merinfo'>Merinfo</a>, <a class='jump' href='#eniro'>Eniro</a> och <a class='jump' href='#birthday'>Birthday</a> visar din adress och ditt nummer för vem som helst. <strong>Det är gratis att ta bort sig och tar ungefär 20 minuter med BankID.</strong> Gå igenom listan uppifrån och ner.",
+        en:"<a class='jump' href='#ratsit'>Ratsit</a>, <a class='jump' href='#hitta'>Hitta</a>, <a class='jump' href='#mrkoll'>MrKoll</a>, <a class='jump' href='#merinfo'>Merinfo</a>, <a class='jump' href='#eniro'>Eniro</a> and <a class='jump' href='#birthday'>Birthday</a> show your address and phone number to anyone. <strong>Removing yourself is free and takes about 20 minutes with BankID.</strong> Work through the list from top to bottom."},
   introTitle:{sv:"Varför det här spelar roll",en:"Why this matters"},
   intro:{sv:"<p class='first'>Vem som kan se var du bor borde vara ditt beslut.</p><p>I dag räcker ett namn för att få fram någons adress, telefonnummer och vilka de bor med. Gratis, på några sekunder.</p><p>Det angår alla: den som lämnat en partner, den som fått hot i jobbet och den som bara vill få vara i fred. Att uppgifter är offentliga borde inte betyda att de ligger ute för vem som helst.</p><p>Den här sidan gör det enkelt att ta tillbaka den kontrollen.</p>",
          en:"<p class='first'>Who can see where you live should be your decision.</p><p>Today a name is enough to find someone's address, phone number and who they live with. For free, in seconds.</p><p>That concerns everyone: someone who has left a partner, someone threatened at work, and someone who simply wants to be left alone. Public records should not mean posted for anyone to browse.</p><p>This page makes taking back that control simple.</p>"},
@@ -479,6 +485,7 @@ function card(item, n){
   const done = !!state.done[item.id];
   const li = document.createElement("li");
   li.className = "card" + (done ? " is-done" : "");
+  li.id = item.id;
   if(done){
     li.innerHTML = `<div class="head"><span class="num" aria-hidden="true">✓</span><h3>${L(item.name)}</h3><button type="button" class="btn check small" data-id="${item.id}" aria-pressed="true" aria-label="${L(T.done)}: ${L(item.name)}"><span class="box" aria-hidden="true"></span><span>${L(T.done)}</span></button></div>`;
     return li;
@@ -556,6 +563,19 @@ function downloadReminder(){
 /* ---------- events ---------- */
 document.addEventListener("click", e => {
   const t = e.target;
+  const jump = t.closest(".jump");
+  if(jump){
+    e.preventDefault();
+    const card = document.getElementById(jump.getAttribute("href").slice(1));
+    if(card){
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      card.scrollIntoView({behavior: still ? "auto" : "smooth", block:"start"});
+      card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+      setTimeout(()=>card.classList.remove("flash"), 1500);
+      const target = card.querySelector(".check"); if(target) target.focus({preventScroll:true});
+    }
+    return;
+  }
   const chk = t.closest(".check");
   if(chk){ const id = chk.dataset.id; state.done[id] = !state.done[id]; save(); render(); const again = document.querySelector(`.check[data-id="${id}"]`); if(again) again.focus({preventScroll:true}); return; }
   const cp = t.closest(".copy");
